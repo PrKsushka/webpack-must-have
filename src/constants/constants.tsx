@@ -1,5 +1,6 @@
 import { DropdownAndCategory } from "../types/types";
 
+
 export const data: Array<DropdownAndCategory> = [
   {
     id: 1,
@@ -20,44 +21,35 @@ export const links = {
   about: "/about",
   signIn: "/signIn",
   signUp: "/signUp",
+  profile: "/profile",
 };
 const menuData = {
   home: {
-    id: 1,
+    id: 0,
     label: "Home",
     path: "/",
   },
   products: {
     base: {
-      id: 2,
+      id: 1,
       label: "Products",
       path: "/products",
     },
     xbox: {
-      id: 3,
+      id: 2,
       label: "XBOX",
       path: "/products/xbox",
     },
     pc: {
-      id: 4,
+      id: 3,
       label: "PC",
       path: "/products/pc",
     },
   },
   about: {
-    id: 5,
+    id: 4,
     label: "About",
     path: "/about",
-  },
-  signIn: {
-    id: 6,
-    label: "Sign In",
-    path: "/signIn",
-  },
-  signUp: {
-    id: 7,
-    label: "Sign Up",
-    path: "/signUp",
   },
 };
 
@@ -68,6 +60,4 @@ export const headerData = [
     sub: [menuData.products.pc, menuData.products.xbox],
   },
   menuData.about,
-  menuData.signIn,
-  menuData.signUp,
 ];

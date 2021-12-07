@@ -1,0 +1,35 @@
+@import "src/styles/mixin";
+
+.formData {
+  display: flex;
+  flex-direction: column;
+
+  .wrapper {
+    .title {
+      @include fonts("Roboto", 24px, $w);
+    }
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    .invalid {
+      pointer-events: all;
+      @include fonts("Roboto", 16px, red);
+    }
+
+    input {
+      pointer-events: all;
+      padding: 4px 80px;
+    }
+  }
+
+  .but {
+    pointer-events: all;
+    padding: 7px 50px;
+    border-radius: 13px;
+    background: $purple;
+    @include fonts("Roboto", 14px, $w);
+    cursor: pointer;
+  }
+}

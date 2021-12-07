@@ -16,7 +16,31 @@ export default webpackMockServer.add((app, helper) => {
   app.post("/testPostMock", (req, res) => {
     res.json({ body: req.body || null, success: true });
   });
+  app.post("/api/auth/signIn/", (req, res) => {
+    if (!req.body) {
+      return res.status(400).json({
+        status: "error",
+        error: "req body cannot be empty",
+      });
+    }
+    return res.status(201).json({
+      name: req.body.name,
+      password: req.body.password,
+    });
+  });
 
+  app.put("/api/auth/signUp", (req, res) => {
+    if (!req.body) {
+      return res.status(400).json({
+        status: "error",
+        error: "req body cannot be empty",
+      });
+    }
+    return res.status(200).json({
+      name: req.body.name,
+      password: req.body.password,
+    });
+  });
   app.get("/api/getTopProducts", (_req, res) => {
     data.sort((a: Product, b: Product) => {
       const c: Date | unknown = new Date(b.date);
