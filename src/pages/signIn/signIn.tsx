@@ -1,42 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
 import { SignIn } from "@/types/types";
 import Input from "@/components/input/input";
-import { signInPostData } from "@/api/signInRegistrationQuery";
-import localStorageService from "@/localStorageService/localStorageService";
-import { Context } from "@/constants/context";
+import { useDispatch, useSelector } from "react-redux";
+import { signAction } from "@/redux/actions/authActions";
+import { RootState } from "@/main";
 
 const SignIn: React.FunctionComponent<SignIn> = function () {
-  const [checkField, setCheckField] = useState(false);
-  const { changeState, modalActive, setUserName } = useContext(Context);
+  const [checkField, setCheckField] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: "",
     password: "",
   });
 
+  const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
   function handleClick(e: { preventDefault: () => void }) {
     e.preventDefault();
     const formData = {
       name: input.name,
       password: input.password,
     };
-    signInPostData({ formData })
-      .then((res) => {
-        localStorageService.setToken(res.data);
-        const dataUser = localStorageService.getToken();
-        // @ts-ignore
-        setUserName(dataUser.name);
-        changeState();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(signAction(formData));
   }
 
   const enabled = input.name.length > 0 && input.password.length > 0 && !checkField;
   return (
-    <Modal isActive={modalActive}>
+    <Modal isActive={active}>
       <form className={signin.formData}>
         <Input
           type="text"

@@ -1,26 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
-import { Registration, HandleClickTypes, ElementsForLogInLogOut } from "../../types/types";
+import { HandleClickTypes } from "../../types/types";
 import Input from "../../components/input/input";
-import { registrationPostData } from "@/api/signInRegistrationQuery";
-import localStorageService from "@/localStorageService/localStorageService";
-import { Context } from "@/constants/context";
+import { useDispatch, useSelector } from "react-redux";
+import { registrationAction } from "@/redux/actions/authActions";
+import { RootState } from "@/main";
 
-const Registration: React.FunctionComponent<Registration> = function ({ setRegistrationModal, active }) {
+const Registration: React.FunctionComponent = function () {
   const [checkField, setCheckField] = useState(false);
+  const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
+  const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();
-  const { changeState, setUserName } = useContext<ElementsForLogInLogOut>(Context);
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: "",
     password: "",
     passwordDuplicate: "",
   });
-
-  const redirect = () => {
-    history.push("/profile");
-  };
 
   function handleClick(e: HandleClickTypes) {
     e.preventDefault();
@@ -28,22 +26,10 @@ const Registration: React.FunctionComponent<Registration> = function ({ setRegis
       name: input.name,
       password: input.password,
     };
-    registrationPostData({ formData })
-      .then((res) => {
-        if (res.data) {
-          localStorageService.setToken(res.data);
-          const info = localStorageService.getToken();
-          // @ts-ignore
-          setUserName(info.name);
-          redirect();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setRegistrationModal(false);
-    changeState();
+    (authorized) ? history.push("/profile") : history.push("/");
+    dispatch(registrationAction(formData));
   }
+
   const enabled =
     input.name.length > 0 && input.password.length > 0 && input.passwordDuplicate.length > 0 && !checkField;
   return (

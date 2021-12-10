@@ -123,3 +123,10 @@ export interface HandleClickTypes {
 export interface signInRegistraionPostDataTypes {
   formData: object;
 }
+export interface initialStateTypes {
+  userData: object;
+  authorized: boolean;
+  errorMessage: string;
+  successMessage: string;
+  modalActive: boolean;
+}
