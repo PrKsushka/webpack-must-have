@@ -56,12 +56,7 @@ export const authReducer = (state = initialState, action: any) => {
       };
     case LOG_OUT_ACTION:
       return {
-        ...state,
-        userData: {},
-        authorized: false,
-        errorMessage: "",
-        successMessage: "",
-        modalActive: true,
+        ...initialState,
       };
     default:
       return state;
