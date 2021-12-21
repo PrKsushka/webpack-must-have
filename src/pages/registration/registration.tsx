@@ -7,13 +7,15 @@ import signin from "../../components/input/input.module.scss";
 import Input from "../../components/input/validator";
 import { registrationAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "@/components/input/validatorSchema";
 
 const Registration: React.FunctionComponent = function () {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();

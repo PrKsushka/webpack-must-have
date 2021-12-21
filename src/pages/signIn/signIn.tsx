@@ -6,6 +6,8 @@ import signin from "../../components/input/input.module.scss";
 import Input from "@/components/input/validator";
 import { signInAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
+import { schema } from "@/components/input/validatorSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 const SignIn: React.FunctionComponent = function () {
@@ -13,7 +15,7 @@ const SignIn: React.FunctionComponent = function () {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: "",
