@@ -1,14 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
-import { SignIn } from "@/types/types";
-import Input from "@/components/input/input";
-import { useDispatch, useSelector } from "react-redux";
-import { signAction } from "@/redux/actions/authActions";
+import Input from "@/components/input/validator";
+import { signInAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 
-const SignIn: React.FunctionComponent<SignIn> = function () {
-  const [checkField, setCheckField] = useState<boolean>(false);
+
+const SignIn: React.FunctionComponent = function () {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: "",
@@ -16,40 +21,38 @@ const SignIn: React.FunctionComponent<SignIn> = function () {
   });
 
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
-  function handleClick(e: { preventDefault: () => void }) {
-    e.preventDefault();
+  const submitForm = () => {
     const formData = {
       name: input.name,
       password: input.password,
     };
-    dispatch(signAction(formData));
-  }
+    dispatch(signInAction(formData));
+  };
 
-  const enabled = input.name.length > 0 && input.password.length > 0 && !checkField;
   return (
     <Modal isActive={active}>
-      <form className={signin.formData}>
+      <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
-          type="text"
           name="name"
-          text="Login"
+          type="text"
+          text="Log in"
           value={input.name}
           setElem={setInput}
-          setCheckField={setCheckField}
-          input={input}
+          register={register}
+          errors={errors}
         />
         <br />
         <Input
-          type="password"
           name="password"
+          type="password"
           text="Password"
           value={input.password}
           setElem={setInput}
-          setCheckField={setCheckField}
-          input={input}
+          register={register}
+          errors={errors}
         />
         <br />
-        <button type="button" className={signin.but} onClick={handleClick} disabled={!enabled}>
+        <button type="submit" className={signin.but}>
           Отправить
         </button>
       </form>

@@ -5,13 +5,10 @@ import home from "./home.module.scss";
 import SearchInput from "@/components/searchInput/searchInput";
 import CardItem from "@/components/cardItem/cardItem";
 import Category from "@/components/categories/category";
-import { Product } from "../../types/types";
+import { ShowModalLocation, Product } from "../../types/types";
 import SignIn from "../signIn/signIn";
 
-interface ShowModalLocation {
-  from: object;
-  show: boolean;
-}
+
 
 const Home: React.FunctionComponent = function () {
   const [topProducts, setTopProducts] = useState<Array<Product>>([]);

@@ -4,8 +4,15 @@ import {
   REGISTRATION_FAILED_ACTION,
   SIGN_IN_CONFIRMED_ACTION,
   SIGN_IN_FAILED_ACTION,
-} from "@/redux/reduxConstants/signInRegistrationConstants";
-import { initialStateTypes } from "@/types/types";
+} from "@/store/authenticate/authConstants/signInRegistrationConstants";
+
+interface initialStateTypes {
+  userData: object;
+  authorized: boolean;
+  errorMessage: string;
+  successMessage: string;
+  modalActive: boolean;
+}
 
 const initialState: initialStateTypes = {
   userData: {},

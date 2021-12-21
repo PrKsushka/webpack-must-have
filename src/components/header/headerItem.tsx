@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import header from "./header.module.scss";
 import HeaderList from "@/components/header/headerList";
-import { HeaderItemTypes } from "@/types/types";
+import { HeaderItemTypes } from "./headerTypes";
 
 const HeaderItem: React.FunctionComponent<HeaderItemTypes> = function ({ item }) {
   return (

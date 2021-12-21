@@ -3,8 +3,13 @@ import axios from "axios";
 import MoonLoader from "react-spinners/MoonLoader";
 import s from "./searchInput.module.scss";
 import useDebounce from "../debounceHook/debounceHook";
-import { Post } from "../../types/types";
 
+export interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 const SearchInput: React.FunctionComponent = function () {
   const [input, setInput] = useState<string>("");
   const [postFound, setPostFound] = useState<Array<Post>>([]);
@@ -16,11 +21,6 @@ const SearchInput: React.FunctionComponent = function () {
   const expandedContainer = () => {
     setExpanded(true);
   };
-  // const lostExpandedContainer = () => {
-  //   setExpanded(false);
-  //   setInput((prevState) => ({ ...prevState, search: "" }));
-  //   setPostFound([]);
-  // };
   const postAlert = () => {
     alert("add");
   };

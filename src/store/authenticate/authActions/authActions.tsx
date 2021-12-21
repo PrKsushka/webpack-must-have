@@ -1,12 +1,12 @@
 import { registrationPostData, signInPostData } from "@/api/signInRegistrationQuery";
-import localStorageService from "@/localStorageService/localStorageService";
+
 import {
   LOG_OUT_ACTION,
   REGISTRATION_CONFIRMED_ACTION,
   REGISTRATION_FAILED_ACTION,
   SIGN_IN_CONFIRMED_ACTION,
   SIGN_IN_FAILED_ACTION,
-} from "@/redux/reduxConstants/signInRegistrationConstants";
+} from "@/store/authenticate/authConstants/signInRegistrationConstants";
 import { Action, Dispatch } from "redux";
 
 export function signInConfirmedAction(data: object) {
@@ -39,13 +39,15 @@ export function logOutAction() {
     type: LOG_OUT_ACTION,
   };
 }
-export function signAction(formData: object) {
+export function signInAction(formData: object) {
   return (dispatch: Dispatch<Action>) => {
     signInPostData({ formData })
       .then((res) => {
-        localStorageService.setToken(res.data);
-
-        dispatch(signInConfirmedAction(res.data));
+        if (res.data) {
+          dispatch(signInConfirmedAction(res.data));
+        } else {
+          throw Error();
+        }
       })
       .catch((err) => {
         dispatch(signInFailedAction(err));
@@ -59,7 +61,8 @@ export function registrationAction(formData: object) {
       .then((res) => {
         if (res.data) {
           dispatch(registrationConfirmedAction(res.data));
-          localStorageService.setToken(res.data);
+        } else {
+          throw Error();
         }
       })
       .catch((err) => {

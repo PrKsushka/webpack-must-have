@@ -14,7 +14,6 @@ import { RootState } from "@/main";
 const App: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   useEffect(() => {
-    localStorage.clear();
     window.history.replaceState({}, document.title);
   }, []);
 

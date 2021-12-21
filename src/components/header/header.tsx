@@ -6,8 +6,7 @@ import { links, headerData } from "../../constants/constants";
 import SignIn from "@/pages/signIn/signIn";
 import Registration from "@/pages/registration/registration";
 import HeaderList from "@/components/header/headerList";
-import localStorageService from "@/localStorageService/localStorageService";
-import { logOutAction } from "@/redux/actions/authActions";
+import { logOutAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 
 const Header: React.FunctionComponent = function () {
@@ -31,7 +30,6 @@ const Header: React.FunctionComponent = function () {
     dispatch(logOutAction());
     setRegister(false);
     setCheckSignIn(false);
-    localStorageService.removeToken();
     history.push("/");
     window.history.replaceState({}, document.title);
   };
@@ -62,9 +60,9 @@ const Header: React.FunctionComponent = function () {
             </>
           )}
         </ul>
-        {userRegister ? <Registration /> : ""}
+        {userRegister ? <Registration /> : null}
       </div>
-      {userSignIn ? <SignIn /> : ""}
+      {userSignIn ? <SignIn /> : null}
     </header>
   );
 };

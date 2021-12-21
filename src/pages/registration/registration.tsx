@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
-import { HandleClickTypes } from "../../types/types";
-import Input from "../../components/input/input";
-import { useDispatch, useSelector } from "react-redux";
-import { registrationAction } from "@/redux/actions/authActions";
+import Input from "../../components/input/validator";
+import { registrationAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 
 const Registration: React.FunctionComponent = function () {
-  const [checkField, setCheckField] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();
@@ -19,53 +23,53 @@ const Registration: React.FunctionComponent = function () {
     password: "",
     passwordDuplicate: "",
   });
-
-  function handleClick(e: HandleClickTypes) {
-    e.preventDefault();
+  const submitForm = () => {
     const formData = {
       name: input.name,
       password: input.password,
     };
-    (authorized) ? history.push("/profile") : history.push("/");
     dispatch(registrationAction(formData));
+  };
+  if (authorized) {
+    history.push("/profile");
+  } else {
+    history.push("/");
   }
-
-  const enabled =
-    input.name.length > 0 && input.password.length > 0 && input.passwordDuplicate.length > 0 && !checkField;
   return (
     <Modal isActive={active}>
-      <form className={signin.formData}>
+      <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
-          type="text"
           name="name"
-          text="Login"
+          type="text"
+          text="Log in"
           value={input.name}
           setElem={setInput}
-          setCheckField={setCheckField}
-          input={input}
+          register={register}
+          errors={errors}
         />
         <br />
         <Input
-          type="password"
           name="password"
+          type="password"
           text="Password"
           value={input.password}
           setElem={setInput}
-          setCheckField={setCheckField}
-          input={input}
+          register={register}
+          errors={errors}
         />
         <br />
         <Input
+          input={input}
           type="password"
           name="passwordDuplicate"
-          text="Repeat your password"
+          text="Duplicate your password"
           value={input.passwordDuplicate}
+          register={register}
+          errors={errors}
           setElem={setInput}
-          setCheckField={setCheckField}
-          input={input}
         />
         <br />
-        <button type="button" className={signin.but} onClick={handleClick} disabled={!enabled}>
+        <button type="submit" className={signin.but}>
           Отправить
         </button>
       </form>
