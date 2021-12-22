@@ -1,20 +1,20 @@
-interface subObj {
+interface SubObj {
   id: number;
   label: string;
   path: string;
 }
-interface headerObject {
+interface HeaderObject {
   id: number;
   label?: string;
-  path?: string | string[] | any;
-  sub?: Array<subObj>;
+  path: string;
+  sub?: Array<SubObj>;
 }
 export interface HeaderItemTypes {
-  item: headerObject;
+  item: HeaderObject;
   root: boolean;
 }
 
 export interface HeaderListTypes {
-  headerMenuArr: Array<headerObject>;
+  headerMenuArr: Array<HeaderObject>;
   root: boolean;
 }

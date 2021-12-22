@@ -5,8 +5,6 @@
   flex-direction: column;
 
   .wrapper {
-    @include fonts("Roboto", 14px, red);
-
     .title {
       @include fonts("Roboto", 24px, $w);
     }

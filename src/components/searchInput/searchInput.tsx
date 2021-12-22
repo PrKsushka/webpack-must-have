@@ -3,16 +3,11 @@ import axios from "axios";
 import MoonLoader from "react-spinners/MoonLoader";
 import s from "./searchInput.module.scss";
 import useDebounce from "../debounceHook/debounceHook";
+import { Product } from "@/types/types";
 
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
 const SearchInput: React.FunctionComponent = function () {
   const [input, setInput] = useState<string>("");
-  const [postFound, setPostFound] = useState<Array<Post>>([]);
+  const [postFound, setPostFound] = useState<Array<Product>>([]);
   const [isExpanded, setExpanded] = useState(false);
   const [isLoading, setLoading] = useState(false);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -43,7 +38,8 @@ const SearchInput: React.FunctionComponent = function () {
     }
   };
   useDebounce(input, 500, searchName);
-  const printInformation = (arr: Array<Post>) => arr.filter((val: Post) => val.title.toLowerCase().includes(input.toLowerCase()));
+  const printInformation = (arr: Array<Product>) =>
+    arr.filter((val: Product) => val.title.toLowerCase().includes(input.toLowerCase()));
   return (
     <div className={s.search}>
       <input
@@ -58,7 +54,7 @@ const SearchInput: React.FunctionComponent = function () {
       />
       {isLoading && <MoonLoader loading color="#000" size={20} />}
       {isExpanded && input !== ""
-        ? printInformation(postFound).map((val: Post) => (
+        ? printInformation(postFound).map((val: Product) => (
             <div key={val.id} onClick={postAlert} className={s.foundElements}>
               {val.title}
             </div>

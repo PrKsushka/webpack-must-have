@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpackMockServer from "webpack-mock-server";
 import data from "./data.json";
-import { Product } from "./src/types/types";
+import { TopProduct } from "./src/types/types";
 
 export default webpackMockServer.add((app, helper) => {
   app.get("/testMock", (_req, res) => {
@@ -16,7 +16,7 @@ export default webpackMockServer.add((app, helper) => {
   app.post("/testPostMock", (req, res) => {
     res.json({ body: req.body || null, success: true });
   });
-  app.post("/api/auth/signIn/", (req, res) => {
+  app.post("/api/auth/signInModal/", (req, res) => {
     if (!req.body) {
       return res.status(400).json({
         status: "error",
@@ -42,7 +42,7 @@ export default webpackMockServer.add((app, helper) => {
     });
   });
   app.get("/api/getTopProducts", (_req, res) => {
-    data.sort((a: Product, b: Product) => {
+    data.sort((a: TopProduct, b: TopProduct) => {
       const c: Date | unknown = new Date(b.date);
       const d: Date | unknown = new Date(a.date);
       return c - d;

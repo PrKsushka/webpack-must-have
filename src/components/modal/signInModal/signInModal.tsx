@@ -2,20 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../components/input/input.module.scss";
+import signin from "../../input/input.module.scss";
 import Input from "@/components/input/input";
 import { signInAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
-import { schema } from "@/components/input/validatorSchema";
+import { loginRegisterSchema } from "@/components/input/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { dataForm } from "@/types/types";
+import ErrorMessage from "@/components/errorMessage/errorMessage";
 
-const SignIn: React.FunctionComponent = function () {
+const SignInModal: React.FunctionComponent = function () {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
 
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
@@ -33,8 +34,8 @@ const SignIn: React.FunctionComponent = function () {
             required: true,
           }}
           register={register}
-          errors={errors}
         />
+        {errors.name ? <ErrorMessage>{errors.name.message}</ErrorMessage> : null}
         <br />
         <Input
           name="password"
@@ -44,8 +45,8 @@ const SignIn: React.FunctionComponent = function () {
             required: true,
           }}
           register={register}
-          errors={errors}
         />
+        {errors.password ? <ErrorMessage>{errors.password.message}</ErrorMessage> : null}
         <br />
         <button type="submit" className={signin.but}>
           Отправить
@@ -54,4 +55,4 @@ const SignIn: React.FunctionComponent = function () {
     </Modal>
   );
 };
-export default SignIn;
+export default SignInModal;

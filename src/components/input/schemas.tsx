@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const schema = yup.object().shape({
+export const loginRegisterSchema = yup.object().shape({
   name: yup
     .string()
     .required("Login is required!")

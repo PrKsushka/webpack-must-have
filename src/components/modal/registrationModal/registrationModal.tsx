@@ -3,20 +3,21 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../components/input/input.module.scss";
+import signin from "../../input/input.module.scss";
 import Input from "@/components/input/input";
 import { registrationAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "@/components/input/validatorSchema";
+import { loginRegisterSchema } from "@/components/input/schemas";
 import { dataForm } from "@/types/types";
+import ErrorMessage from "@/components/errorMessage/errorMessage";
 
-const Registration: React.FunctionComponent = function () {
+const RegistrationModal: React.FunctionComponent = function () {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+  } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();
@@ -40,8 +41,8 @@ const Registration: React.FunctionComponent = function () {
             required: true,
           }}
           register={register}
-          errors={errors}
         />
+        {errors.name ? <ErrorMessage>{errors.name.message}</ErrorMessage> : null}
         <br />
         <Input
           name="password"
@@ -51,8 +52,8 @@ const Registration: React.FunctionComponent = function () {
             required: true,
           }}
           register={register}
-          errors={errors}
         />
+        {errors.password ? <ErrorMessage>{errors.password.message}</ErrorMessage> : null}
         <br />
         <Input
           type="password"
@@ -62,8 +63,8 @@ const Registration: React.FunctionComponent = function () {
             required: true,
           }}
           register={register}
-          errors={errors}
         />
+        {errors.passwordDuplicate ? <ErrorMessage>{errors.passwordDuplicate.message}</ErrorMessage> : null}
         <br />
         <button type="submit" className={signin.but}>
           Отправить
@@ -72,4 +73,4 @@ const Registration: React.FunctionComponent = function () {
     </Modal>
   );
 };
-export default Registration;
+export default RegistrationModal;

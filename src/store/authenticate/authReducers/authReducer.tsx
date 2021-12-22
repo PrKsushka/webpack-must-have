@@ -44,7 +44,7 @@ export const authReducer = (state = initialState, action: any) => {
         ...state,
         userData: action.payload,
         authorized: true,
-        successMessage: "Registration is completed",
+        successMessage: "RegistrationModal is completed",
         modalActive: false,
       };
     case REGISTRATION_FAILED_ACTION:

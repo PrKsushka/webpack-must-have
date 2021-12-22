@@ -28,7 +28,7 @@ interface Rating {
   rate: number;
   count: number;
 }
-export interface Product {
+export interface TopProduct {
   id: number;
   title: string;
   price: number;
@@ -41,4 +41,10 @@ export interface Product {
 export interface dataForm {
   name: string;
   password: string;
+}
+export interface Product {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 }

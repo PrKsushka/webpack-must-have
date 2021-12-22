@@ -6,7 +6,7 @@ export interface InputTypes {
   name: string;
   text: string;
   register:any;
-  errors:any;
+  errors?:any;
   registerOptions: object;
 }
 interface HandleChangeTarget extends EventTarget {

@@ -19,7 +19,7 @@ export const links = {
   home: "/",
   products: "/products",
   about: "/about",
-  signIn: "/signIn",
+  signIn: "/signInModal",
   signUp: "/signUp",
   profile: "/profile",
 };

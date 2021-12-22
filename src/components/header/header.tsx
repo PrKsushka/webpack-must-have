@@ -3,8 +3,8 @@ import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import header from "./header.module.scss";
 import { links, headerData } from "../../constants/constants";
-import SignIn from "@/pages/signIn/signIn";
-import Registration from "@/pages/registration/registration";
+import SignInModal from "@/components/modal/signInModal/signInModal";
+import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
 import HeaderList from "@/components/header/headerList";
 import { logOutAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
@@ -60,9 +60,9 @@ const Header: React.FunctionComponent = function () {
             </>
           )}
         </ul>
-        {userRegister ? <Registration /> : null}
+        {userRegister ? <RegistrationModal /> : null}
       </div>
-      {userSignIn ? <SignIn /> : null}
+      {userSignIn ? <SignInModal /> : null}
     </header>
   );
 };
