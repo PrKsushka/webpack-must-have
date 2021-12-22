@@ -38,4 +38,7 @@ export interface Product {
   date: string;
   rating: Rating;
 }
-
+export interface dataForm {
+  name: string;
+  password: string;
+}

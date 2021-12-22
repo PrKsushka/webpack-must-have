@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
-import Input from "../../components/input/validator";
+import Input from "@/components/input/input";
 import { registrationAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "@/components/input/validatorSchema";
+import { dataForm } from "@/types/types";
 
 const Registration: React.FunctionComponent = function () {
   const {
@@ -20,17 +21,9 @@ const Registration: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();
   const dispatch = useDispatch();
-  const [input, setInput] = useState({
-    name: "",
-    password: "",
-    passwordDuplicate: "",
-  });
-  const submitForm = () => {
-    const formData = {
-      name: input.name,
-      password: input.password,
-    };
-    dispatch(registrationAction(formData));
+
+  const submitForm = (data: dataForm) => {
+    dispatch(registrationAction(data));
   };
   if (authorized) {
     history.push("/profile");
@@ -42,10 +35,10 @@ const Registration: React.FunctionComponent = function () {
       <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"
-          type="text"
           text="Log in"
-          value={input.name}
-          setElem={setInput}
+          registerOptions={{
+            required: true,
+          }}
           register={register}
           errors={errors}
         />
@@ -54,21 +47,22 @@ const Registration: React.FunctionComponent = function () {
           name="password"
           type="password"
           text="Password"
-          value={input.password}
-          setElem={setInput}
+          registerOptions={{
+            required: true,
+          }}
           register={register}
           errors={errors}
         />
         <br />
         <Input
-          input={input}
           type="password"
           name="passwordDuplicate"
           text="Duplicate your password"
-          value={input.passwordDuplicate}
+          registerOptions={{
+            required: true,
+          }}
           register={register}
           errors={errors}
-          setElem={setInput}
         />
         <br />
         <button type="submit" className={signin.but}>

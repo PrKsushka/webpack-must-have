@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
 import signin from "../../components/input/input.module.scss";
-import Input from "@/components/input/validator";
+import Input from "@/components/input/input";
 import { signInAction } from "@/store/authenticate/authActions/authActions";
 import { RootState } from "@/main";
 import { schema } from "@/components/input/validatorSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { dataForm } from "@/types/types";
 
 const SignIn: React.FunctionComponent = function () {
   const {
@@ -17,18 +17,10 @@ const SignIn: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
   const dispatch = useDispatch();
-  const [input, setInput] = useState({
-    name: "",
-    password: "",
-  });
 
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
-  const submitForm = () => {
-    const formData = {
-      name: input.name,
-      password: input.password,
-    };
-    dispatch(signInAction(formData));
+  const submitForm = (data: dataForm) => {
+    dispatch(signInAction(data));
   };
 
   return (
@@ -36,10 +28,10 @@ const SignIn: React.FunctionComponent = function () {
       <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"
-          type="text"
           text="Log in"
-          value={input.name}
-          setElem={setInput}
+          registerOptions={{
+            required: true,
+          }}
           register={register}
           errors={errors}
         />
@@ -48,8 +40,9 @@ const SignIn: React.FunctionComponent = function () {
           name="password"
           type="password"
           text="Password"
-          value={input.password}
-          setElem={setInput}
+          registerOptions={{
+            required: true,
+          }}
           register={register}
           errors={errors}
         />

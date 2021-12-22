@@ -6,7 +6,7 @@ interface subObj {
 interface headerObject {
   id: number;
   label?: string;
-  path?: string | any;
+  path?: string | string[] | any;
   sub?: Array<subObj>;
 }
 export interface HeaderItemTypes {
