@@ -20,8 +20,11 @@ export interface ElementsForLogInLogOut {
 export interface signInRegistraionPostDataTypes {
   formData: object;
 }
+type ShowModalType = {
+  pathname: string;
+}
 export interface ShowModalLocation {
-  from: object;
+  from: ShowModalType;
   show: boolean;
 }
 interface Rating {

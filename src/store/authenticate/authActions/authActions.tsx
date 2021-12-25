@@ -44,6 +44,7 @@ export function signInAction(formData: object) {
     signInPostData({ formData })
       .then((res) => {
         if (res.data) {
+          console.log(res.data)
           dispatch(signInConfirmedAction(res.data));
         } else {
           throw Error();

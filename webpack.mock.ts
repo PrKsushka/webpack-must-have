@@ -16,7 +16,7 @@ export default webpackMockServer.add((app, helper) => {
   app.post("/testPostMock", (req, res) => {
     res.json({ body: req.body || null, success: true });
   });
-  app.post("/api/auth/signInModal/", (req, res) => {
+  app.post("/api/auth/signIn", (req, res) => {
     if (!req.body) {
       return res.status(400).json({
         status: "error",

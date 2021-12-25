@@ -19,8 +19,6 @@ export const links = {
   home: "/",
   products: "/products",
   about: "/about",
-  signIn: "/signInModal",
-  signUp: "/signUp",
   profile: "/profile",
 };
 const menuData = {

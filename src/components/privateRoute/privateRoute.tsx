@@ -1,4 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
+import { links } from "@/constants/constants";
 
 type RouterPrivate = {
   component: any;
@@ -11,7 +12,7 @@ const PrivateRoute = function ({ component: Component, auth, ...rest }: RouterPr
       {...rest}
       render={(props) =>
         !auth ? (
-          <Redirect to={{ pathname: "/", state: { from: props.location, show: true } }} />
+          <Redirect to={{ pathname: `${links.home}`,search: `signIn=${auth}`, state: { from: props.location, show: true } }} />
         ) : (
           <Component {...props} />
         )

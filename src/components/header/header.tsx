@@ -33,7 +33,6 @@ const Header: React.FunctionComponent = function () {
     history.push("/");
     window.history.replaceState({}, document.title);
   };
-
   return (
     <header className={header.main}>
       <Link to={links.home} className={header.logo}>

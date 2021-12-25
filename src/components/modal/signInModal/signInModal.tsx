@@ -18,7 +18,6 @@ const SignInModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
-
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
   const submitForm = (data: dataForm) => {
     dispatch(signInAction(data));
