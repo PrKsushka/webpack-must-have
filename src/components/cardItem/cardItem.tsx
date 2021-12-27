@@ -1,6 +1,6 @@
 import React from "react";
 import card from "./cardItem.module.scss";
-import { CardProps } from "../../types/types";
+import { CardProps } from "./cardItem.types";
 const CardItem: React.FunctionComponent<CardProps> = function ({ item: { image, title, price } }) {
   return (
     <div className={card.cardItem}>

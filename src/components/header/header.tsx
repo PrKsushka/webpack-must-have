@@ -1,37 +1,38 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import header from "./header.module.scss";
 import { links, headerData } from "../../constants/constants";
-import { ElementsForLogInLogOut } from "../../types/types";
-import SignIn from "@/pages/signIn/signIn";
-import Registration from "@/pages/registration/registration";
+import SignInModal from "@/components/modal/signInModal/signInModal";
+import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
 import HeaderList from "@/components/header/headerList";
-import localStorageService from "@/localStorageService/localStorageService";
-import { Context } from "@/constants/context";
+import { logOutAction } from "@/store/authenticate/authActions/authActions";
+import { RootState } from "@/main";
 
 const Header: React.FunctionComponent = function () {
   const [userRegister, setRegister] = useState<boolean>(false);
   const [userSignIn, setCheckSignIn] = useState<boolean>(false);
-  const [registraionModal, setRegistrationModal] = useState<boolean>(false);
-  const { setModalActive, authorized, setAuthorized, userName } = useContext<ElementsForLogInLogOut>(Context);
+
+  const dispatch = useDispatch();
+  const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
+  const name = useSelector<RootState, string>((state) => state.auth.userData.name);
+
   const signIn = () => {
-    setModalActive(true);
     setCheckSignIn(true);
   };
 
   const register = () => {
     setRegister(true);
-    setRegistrationModal(true);
     setCheckSignIn(false);
   };
   const history = useHistory();
   const logOut = () => {
-    setAuthorized(false);
-    localStorageService.removeToken();
+    dispatch(logOutAction());
+    setRegister(false);
+    setCheckSignIn(false);
     history.push("/");
     window.history.replaceState({}, document.title);
   };
-
   return (
     <header className={header.main}>
       <Link to={links.home} className={header.logo}>
@@ -42,7 +43,7 @@ const Header: React.FunctionComponent = function () {
         <ul className={header.menu}>
           {authorized ? (
             <>
-              <li className={header.buttons}>{userName}</li>
+              <li className={header.buttons}>{name}</li>
               <li className={header.buttons} onClick={logOut}>
                 Log Out
               </li>
@@ -58,9 +59,9 @@ const Header: React.FunctionComponent = function () {
             </>
           )}
         </ul>
-        {userRegister ? <Registration active={registraionModal} setRegistrationModal={setRegistrationModal} /> : ""}
+        {userRegister ? <RegistrationModal /> : null}
       </div>
-      {userSignIn ? <SignIn /> : ""}
+      {userSignIn ? <SignInModal /> : null}
     </header>
   );
 };
