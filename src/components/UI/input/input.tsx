@@ -1,6 +1,6 @@
 import React from "react";
 import signin from "./input.module.scss";
-import { InputTypes } from "@/components/input/input.types";
+import { InputTypes } from "@/components/UI/input/input.types";
 
 const Input: React.FunctionComponent<InputTypes> = function ({ name, type = "text", text, registerOptions, register }) {
   return (

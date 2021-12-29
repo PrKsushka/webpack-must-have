@@ -2,11 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { loginRegisterSchema } from "@/components/input/schemas";
+import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/types";
-import { changePasswordAction } from "@/store/authenticate/authActions";
-import signin from "@/components/input/input.module.scss";
-import Input from "@/components/input/input";
+import { changePasswordAction } from "@/store/modules/auth/auth.actions";
+import signin from "@/components/UI/input/input.module.scss";
+import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
 

@@ -1,29 +1,9 @@
-import { authReducer } from "@/store/authenticate/authReducer";
+import authReducer from "@/store/modules/auth/auth.reducer";
 import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-interface initialStateTypes {
-  userData: object;
-  authorized: boolean;
-  errorMessage: string;
-  successMessage: string;
-  modalActive: boolean;
-  userSignIn: boolean;
-  userRegister: boolean;
-  signInMenu: boolean;
-}
 
-export const initialState: initialStateTypes = {
-  userData: {},
-  authorized: false,
-  errorMessage: "",
-  successMessage: "",
-  modalActive: true,
-  userSignIn: false,
-  userRegister: false,
-  signInMenu: false,
-};
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;

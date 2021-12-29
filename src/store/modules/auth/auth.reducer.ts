@@ -8,13 +8,26 @@ import {
   REGISTRATION_FAILED_ACTION,
   SET_MODAL_ACTIVE,
   SET_MODAL_IN_ACTIVE,
-  SIGN_IN_CLICK_ACTION,
+  SIGN_IN_MODAL_ACTIVE,
   SIGN_IN_CONFIRMED_ACTION,
-  SIGN_IN_FAILED_ACTION, SIGN_IN_PARAMS_ACTION
-} from "@/store/authenticate/signInRegistrationConstants";
-import { initialState } from "@/store/store";
+  SIGN_IN_FAILED_ACTION,
+  SIGN_IN_PARAMS_ACTION,
+} from "@/store/modules/auth/auth.constants";
 
-export const authReducer = (state = initialState, action: any) => {
+import { initialStateTypes } from "@/store/types";
+
+const initialState: initialStateTypes = {
+  userData: {},
+  authorized: false,
+  errorMessage: "",
+  successMessage: "",
+  modalActive: true,
+  userSignIn: false,
+  userRegister: false,
+  signInMenu: false,
+};
+// eslint-disable-next-line default-param-last
+const authReducer = (state = initialState, action: unknown) => {
   switch (action.type) {
     case SIGN_IN_CONFIRMED_ACTION:
       return {
@@ -79,35 +92,35 @@ export const authReducer = (state = initialState, action: any) => {
         ...state,
         modalActive: true,
         userRegister: false,
-        userSignIn: false
+        userSignIn: false,
       };
     case SIGN_IN_PARAMS_ACTION:
       return {
         ...state,
         modalActive: true,
-        signInMenu: true
-      }
+        signInMenu: true,
+      };
     case SET_MODAL_IN_ACTIVE:
       return {
         ...state,
         modalActive: false,
         userRegister: false,
         userSignIn: false,
-        signInMenu: false
+        signInMenu: false,
       };
-    case SIGN_IN_CLICK_ACTION:
+    case SIGN_IN_MODAL_ACTIVE:
       return {
         ...state,
         userSignIn: true,
         userRegister: false,
-        modalActive: true
+        modalActive: true,
       };
     case REGISTER_CLICK_ACTION:
       return {
         ...state,
         userRegister: true,
         userSignIn: false,
-        modalActive: true
+        modalActive: true,
       };
     case CHANGE_DATA_ABOUT_USER_CONFIRMED_ACTION:
       return {
@@ -125,3 +138,4 @@ export const authReducer = (state = initialState, action: any) => {
       return state;
   }
 };
+export default authReducer;

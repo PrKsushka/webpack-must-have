@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import ReactDom from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import modal from "./modal.module.scss";
-import { setModalInActive } from "@/store/authenticate/authActions";
+import { setModalInActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 
 interface Modal {

@@ -3,7 +3,7 @@ import {
   changeDataAboutUser,
   changePasswordPostData,
   registrationPostData,
-  signInPostData
+  signInPostData,
 } from "@/api/signInRegistrationQuery";
 
 import {
@@ -11,13 +11,17 @@ import {
   CHANGE_DATA_ABOUT_USER_FAILED_ACTION,
   CHANGE_PASSWORD_CONFIRMED_ACTION,
   CHANGE_PASSWORD_FAILED_ACTION,
-  LOG_OUT_ACTION, REGISTER_CLICK_ACTION,
+  LOG_OUT_ACTION,
+  REGISTER_CLICK_ACTION,
   REGISTRATION_CONFIRMED_ACTION,
   REGISTRATION_FAILED_ACTION,
-  SET_MODAL_ACTIVE, SET_MODAL_IN_ACTIVE, SIGN_IN_CLICK_ACTION,
+  SET_MODAL_ACTIVE,
+  SET_MODAL_IN_ACTIVE,
   SIGN_IN_CONFIRMED_ACTION,
-  SIGN_IN_FAILED_ACTION, SIGN_IN_PARAMS_ACTION
-} from "@/store/authenticate/signInRegistrationConstants";
+  SIGN_IN_FAILED_ACTION,
+  SIGN_IN_MODAL_ACTIVE,
+  SIGN_IN_PARAMS_ACTION,
+} from "@/store/modules/auth/auth.constants";
 
 export function signInConfirmedAction(data: object) {
   return {
@@ -122,45 +126,45 @@ export function setModalInActive() {
     type: SET_MODAL_IN_ACTIVE,
   };
 }
-export function signInModalActive(){
+export function signInModalActive() {
   return {
-    type: SIGN_IN_CLICK_ACTION,
+    type: SIGN_IN_MODAL_ACTIVE,
   };
 }
-export function signInParamsAction(){
+export function signInParamsAction() {
   return {
     type: SIGN_IN_PARAMS_ACTION,
   };
 }
-export function registerModalActive(){
+export function registerClickAction() {
   return {
     type: REGISTER_CLICK_ACTION,
   };
 }
-export function newDataAboutUserConfirmedAction(data: object) {
+export function changeDataAboutUserConfirmedAction(data: object) {
   return {
     type: CHANGE_DATA_ABOUT_USER_CONFIRMED_ACTION,
     payload: data,
   };
 }
-export function newDataAboutUserFailedAction(message: string) {
+export function changeDataAboutUserFailedAction(message: string) {
   return {
     type: CHANGE_DATA_ABOUT_USER_FAILED_ACTION,
     payload: message,
   };
 }
-export function newDataAboutUserAction(formData: object) {
+export function changeDataAboutUserAction(formData: object) {
   return (dispatch: Dispatch<Action>) => {
     changeDataAboutUser({ formData })
       .then((res) => {
         if (res.data) {
-          dispatch(newDataAboutUserConfirmedAction(res.data));
+          dispatch(changeDataAboutUserConfirmedAction(res.data));
         } else {
           throw Error();
         }
       })
       .catch((err) => {
-        dispatch(newDataAboutUserFailedAction(err));
+        dispatch(changeDataAboutUserFailedAction(err));
       });
   };
 }

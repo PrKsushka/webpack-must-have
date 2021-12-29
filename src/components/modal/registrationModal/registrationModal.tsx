@@ -3,12 +3,12 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../input/input.module.scss";
-import Input from "@/components/input/input";
-import { registrationAction } from "@/store/authenticate/authActions";
+import signin from "../../UI/input/input.module.scss";
+import Input from "@/components/UI/input/input";
+import { registrationAction } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginRegisterSchema } from "@/components/input/schemas";
+import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 

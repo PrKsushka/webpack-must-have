@@ -5,8 +5,8 @@ import header from "./header.module.scss";
 import { links, headerData } from "../../constants/constants";
 import SignInModal from "@/components/modal/signInModal/signInModal";
 import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
-import HeaderList from "@/components/header/headerList";
-import { logOutAction, registerModalActive, signInModalActive } from "@/store/authenticate/authActions";
+import HeaderList from "@/components/header/components/headerList";
+import { logOutAction, registerClickAction, signInModalActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 
 const Header: React.FunctionComponent = function () {
@@ -20,7 +20,7 @@ const Header: React.FunctionComponent = function () {
   };
 
   const register = () => {
-    dispatch(registerModalActive());
+    dispatch(registerClickAction());
   };
   const history = useHistory();
   const logOut = () => {

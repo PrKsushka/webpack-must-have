@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChangePasswordModal from "@/components/modal/changePasswordModal/changePasswordModal";
-import { setModalActive } from "@/store/authenticate/authActions";
+import { setModalActive } from "@/store/modules/auth/auth.actions";
 import profile from "./profile.module.scss";
 import { RootState } from "@/main";
 import InfoAboutUser from "@/pages/profile/infoAboutUser/infoAboutUser";
