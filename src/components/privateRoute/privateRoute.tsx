@@ -1,8 +1,7 @@
 import { Route, Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { links } from "@/constants/constants";
-import { useEffect } from "react";
-import {  setModalInActive } from "@/store/modules/auth/auth.actions";
+import { RootState } from "@/main";
 
 
 type RouterPrivate = {
@@ -11,14 +10,10 @@ type RouterPrivate = {
   path: string;
 };
 const PrivateRoute = function ({ component: Component, auth, ...rest }: RouterPrivate) {
-  const body = document.getElementsByTagName("body")[0];
-  const dispatch=useDispatch();
-  useEffect(() => {
-    dispatch(setModalInActive());
+  const active=useSelector<RootState, boolean>((state)=>state.auth.modalActive);
+  if(!active || auth){
     window.history.replaceState(null, "", "/");
-    body.style.overflow="visible"
-  }, []);
-  window.history.replaceState(null, "", "/");
+  }
   return (
     <Route
       {...rest}
