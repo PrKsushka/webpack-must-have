@@ -24,6 +24,13 @@
     }
   }
 
+  .changePassword {
+    @include fonts("Roboto", 24px, #eb26eb);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
   .but {
     pointer-events: all;
     padding: 7px 50px;

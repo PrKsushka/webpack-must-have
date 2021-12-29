@@ -4,7 +4,7 @@ import "./styles/main.scss";
 import App from "./App";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import confStore from "./store/configureStore";
+import confStore from "./store/store";
 export type RootState = ReturnType<typeof confStore.store.getState>;
 export type AppDispatch = typeof confStore.store.dispatch;
 

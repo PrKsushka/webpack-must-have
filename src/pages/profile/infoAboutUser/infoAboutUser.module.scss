@@ -1,0 +1,13 @@
+.commonInfo {
+  font-family: sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+
+  &.changedInfo {
+    color: greenyellow;
+  }
+
+  &.notChangedInfo {
+    color: $lightPurple;
+  }
+}

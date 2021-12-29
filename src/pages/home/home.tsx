@@ -17,7 +17,6 @@ const Home: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const queryParams = new URLSearchParams(location.search);
   const signIn = queryParams.get("signIn");
-
   const history = useHistory();
   if (authorized) {
     window.history.replaceState(null, "", "/");
@@ -28,7 +27,7 @@ const Home: React.FunctionComponent = function () {
       });
     }
   }
-
+  const signInMenu = useSelector<RootState, boolean>((state) => state.auth.signInMenu);
   useEffect(() => {
     axios.get("api/getTopProducts").then((res) => {
       setTopProducts((prevState) => [...prevState, ...res.data.slice(0, 3)]);
@@ -50,7 +49,7 @@ const Home: React.FunctionComponent = function () {
           <CardItem key={elem.id} item={elem} />
         ))}
       </div>
-      {signIn || state?.show ? <SignInModal /> : ""}
+      {signIn && signInMenu ? <SignInModal /> : null}
     </div>
   );
 };

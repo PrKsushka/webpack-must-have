@@ -6,3 +6,11 @@ export const signInPostData = ({ formData }: signInRegistraionPostDataTypes) =>
 
 export const registrationPostData = ({ formData }: signInRegistraionPostDataTypes) =>
   axios.put("/api/auth/signUp", formData);
+
+export const changePasswordPostData = ({ formData }: signInRegistraionPostDataTypes) =>
+  axios.post("/api/changePassword", formData);
+
+export const changeDataAboutUser = ({ formData }: signInRegistraionPostDataTypes) =>
+  axios.post("/api/saveProfile", formData);
+
+export const products = ({ data }: any) => axios.get("/api/getProducts", data);

@@ -1,48 +1,33 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import Modal from "@/components/modal/modal";
-import signin from "../../input/input.module.scss";
-import Input from "@/components/input/input";
-import { registrationAction } from "@/store/authenticate/authActions";
-import { RootState } from "@/main";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
 import { loginRegisterSchema } from "@/components/input/schemas";
 import { dataForm } from "@/types/types";
+import { changePasswordAction } from "@/store/authenticate/authActions";
+import signin from "@/components/input/input.module.scss";
+import Input from "@/components/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+import Modal from "@/components/modal/modal";
 
-const RegistrationModal: React.FunctionComponent = function () {
+const ChangePasswordModal: React.FunctionComponent = function () {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
-  const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
-  const history = useHistory();
   const dispatch = useDispatch();
-
-  const submitForm = (data: dataForm) => {
-    dispatch(registrationAction(data));
+  const onSubmit = (data: dataForm) => {
+    if (data) {
+      dispatch(changePasswordAction(data));
+    }
+    reset();
   };
-  if (authorized) {
-    history.push("/profile");
-  } else {
-    history.push("/");
-  }
   return (
     <Modal>
-      <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
-        <Input
-          name="name"
-          text="Log in"
-          registerOptions={{
-            required: "Login is required!",
-          }}
-          register={register}
-        />
-        {errors.name ? <ErrorMessage>{errors.name.message}</ErrorMessage> : null}
-        <br />
+      <form className={signin.formData} onSubmit={handleSubmit(onSubmit)} id="formElem">
+        <span className={signin.changePassword}>Change Password</span>
         <Input
           name="password"
           type="password"
@@ -57,7 +42,7 @@ const RegistrationModal: React.FunctionComponent = function () {
         <Input
           type="password"
           name="passwordDuplicate"
-          text="Duplicate your password"
+          text="Repeat your password"
           registerOptions={{
             required: true,
           }}
@@ -72,4 +57,4 @@ const RegistrationModal: React.FunctionComponent = function () {
     </Modal>
   );
 };
-export default RegistrationModal;
+export default ChangePasswordModal;
