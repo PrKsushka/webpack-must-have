@@ -5,6 +5,10 @@
   background: $appBg;
 }
 
+body {
+  overflow: auto;
+}
+
 div,
 p {
   color: $w;

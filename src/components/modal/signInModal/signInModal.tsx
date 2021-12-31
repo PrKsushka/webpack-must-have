@@ -1,15 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../input/input.module.scss";
-import Input from "@/components/input/input";
-import { signInAction } from "@/store/authenticate/authActions/authActions";
-import { RootState } from "@/main";
-import { loginRegisterSchema } from "@/components/input/schemas";
+import signin from "../../UI/input/input.module.scss";
+import Input from "@/components/UI/input/input";
+import { signInAction } from "@/store/modules/auth/auth.actions";
+import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { dataForm } from "@/types/types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+
 
 const SignInModal: React.FunctionComponent = function () {
   const {
@@ -18,13 +18,14 @@ const SignInModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
-  const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
+  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(signInAction(data));
+    body.style.overflow="auto"
   };
 
   return (
-    <Modal isActive={active}>
+    <Modal>
       <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"
@@ -48,7 +49,7 @@ const SignInModal: React.FunctionComponent = function () {
         {errors.password ? <ErrorMessage>{errors.password.message}</ErrorMessage> : null}
         <br />
         <button type="submit" className={signin.but}>
-          Отправить
+          Submit
         </button>
       </form>
     </Modal>

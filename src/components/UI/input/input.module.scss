@@ -1,4 +1,4 @@
-@import "src/styles/mixin";
+@import "../../../styles/mixin";
 
 .formData {
   display: flex;
@@ -22,6 +22,13 @@
       pointer-events: all;
       padding: 4px 80px;
     }
+  }
+
+  .changePassword {
+    @include fonts("Roboto", 24px, #eb26eb);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
   }
 
   .but {

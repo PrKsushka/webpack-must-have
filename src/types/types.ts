@@ -1,4 +1,5 @@
 import { ReactChild, ReactFragment, ReactPortal, Dispatch, SetStateAction } from "react";
+
 export interface DropdownAndCategory {
   id: number;
   link: string;
@@ -7,7 +8,7 @@ type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | und
 export type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 export interface ElementsForLogInLogOut {
-  changeState:any;
+  changeState: unknown;
   setAuthorized: Dispatcher<boolean>;
   modalActive: boolean;
   setModalActive: Dispatcher<boolean>;
@@ -22,7 +23,7 @@ export interface signInRegistraionPostDataTypes {
 }
 type ShowModalType = {
   pathname: string;
-}
+};
 export interface ShowModalLocation {
   from: ShowModalType;
   show: boolean;

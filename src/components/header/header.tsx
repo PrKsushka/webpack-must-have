@@ -1,35 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import header from "./header.module.scss";
 import { links, headerData } from "../../constants/constants";
 import SignInModal from "@/components/modal/signInModal/signInModal";
 import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
-import HeaderList from "@/components/header/headerList";
-import { logOutAction } from "@/store/authenticate/authActions/authActions";
+import HeaderNav from "@/components/header/components/headerNav";
+import { logOutAction, registerClickAction, signInModalActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 
 const Header: React.FunctionComponent = function () {
-  const [userRegister, setRegister] = useState<boolean>(false);
-  const [userSignIn, setCheckSignIn] = useState<boolean>(false);
-
   const dispatch = useDispatch();
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const name = useSelector<RootState, string>((state) => state.auth.userData.name);
-
+  const userSignIn = useSelector<RootState, boolean>((state) => state.auth.userSignIn);
+  const userRegister = useSelector<RootState, boolean>((state) => state.auth.userRegister);
   const signIn = () => {
-    setCheckSignIn(true);
+    dispatch(signInModalActive());
   };
 
   const register = () => {
-    setRegister(true);
-    setCheckSignIn(false);
+    dispatch(registerClickAction());
   };
   const history = useHistory();
   const logOut = () => {
     dispatch(logOutAction());
-    setRegister(false);
-    setCheckSignIn(false);
     history.push("/");
     window.history.replaceState({}, document.title);
   };
@@ -39,11 +34,13 @@ const Header: React.FunctionComponent = function () {
         Game Store
       </Link>
       <div className={header.wrapper}>
-        <HeaderList headerMenuArr={headerData} root />
+        <HeaderNav headerMenuArr={headerData} root />
         <ul className={header.menu}>
           {authorized ? (
             <>
-              <li className={header.buttons}>{name}</li>
+              <li className={header.buttons}>
+                <Link to={links.profile}>{name}</Link>
+              </li>
               <li className={header.buttons} onClick={logOut}>
                 Log Out
               </li>
@@ -60,8 +57,8 @@ const Header: React.FunctionComponent = function () {
           )}
         </ul>
         {userRegister ? <RegistrationModal /> : null}
+        {userSignIn ? <SignInModal /> : null}
       </div>
-      {userSignIn ? <SignInModal /> : null}
     </header>
   );
 };
