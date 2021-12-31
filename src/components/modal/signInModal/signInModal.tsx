@@ -18,8 +18,10 @@ const SignInModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
+  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(signInAction(data));
+    body.style.overflow="auto"
   };
 
   return (

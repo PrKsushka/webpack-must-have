@@ -13,4 +13,3 @@ export const changePasswordPostData = ({ formData }: signInRegistraionPostDataTy
 export const changeDataAboutUser = ({ formData }: signInRegistraionPostDataTypes) =>
   axios.post("/api/saveProfile", formData);
 
-export const products = ({ data }: any) => axios.get("/api/getProducts", data);

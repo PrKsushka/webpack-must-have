@@ -18,16 +18,18 @@ const ChangePasswordModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
+  const { body } = document;
   const onSubmit = (data: dataForm) => {
     if (data) {
       dispatch(changePasswordAction(data));
+      body.style.overflow="auto"
     }
     reset();
   };
   return (
     <Modal>
-      <form className={signin.formData} onSubmit={handleSubmit(onSubmit)} id="formElem">
-        <span className={signin.changePassword}>Change Password</span>
+      <form className={signin.formData} onSubmit={handleSubmit(onSubmit)}>
+        <h3 className={signin.changePassword}>Change Password</h3>
         <Input
           name="password"
           type="password"

@@ -14,29 +14,32 @@
     @include fonts("Roboto", 30px, $w);
   }
 
-  .column {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin: 40px 20px 40px 0;
+  .profileWrapperColumn {
+    @include builder(flex, space-around, 100%);
 
-    img {
-      width: 260px;
-      height: 403px;
-      background: #ccc;
-      border-radius: 20px;
-      margin: 20px;
-      padding: 5px;
-    }
+    .column {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      margin: 40px 0px 40px 0;
 
-    button {
-      background: rgba(131, 0, 193, 0.38);
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 52px;
-      border: none;
-      padding: 16px 20px;
-      @include fonts("Roboto", 14px, $w);
-      cursor: pointer;
+      .profileImage {
+        width: 100%;
+        max-width: 260px;
+        border-radius: 20px;
+        margin: 20px;
+        padding: 5px;
+      }
+
+      button {
+        background: rgba(131, 0, 193, 0.38);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 52px;
+        border: none;
+        padding: 16px 20px;
+        @include fonts("Roboto", 14px, $w);
+        cursor: pointer;
+      }
     }
   }
 }

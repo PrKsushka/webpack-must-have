@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import ReactDom from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import modal from "./modal.module.scss";
@@ -9,16 +9,17 @@ interface Modal {
   children: ReactElement;
 }
 
-const Modal: React.FunctionComponent<Modal> = function ({children }) {
+const Modal: React.FunctionComponent<Modal> = function ({ children }) {
   const dispatch = useDispatch();
-  const body = document.getElementsByTagName("body")[0];
+  const { body } = document;
   const isActive = useSelector<RootState, boolean>((state) => state.auth.modalActive);
-  (isActive)? body.style.overflow="hidden":body.style.overflow="visible";
   const closeModal = () => {
     dispatch(setModalInActive());
-    body.style.overflow="visible"
+    body.style.overflow = "auto";
   };
-
+  useEffect(() => {
+    (isActive)?body.style.overflow = "hidden":body.style.overflow = "auto";
+  }, [isActive]);
   return ReactDom.createPortal(
     <div className={isActive ? modal.active : modal.modal}>
       <div className={modal.iconClose} onClick={closeModal} />

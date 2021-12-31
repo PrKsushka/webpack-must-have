@@ -5,7 +5,7 @@ import header from "./header.module.scss";
 import { links, headerData } from "../../constants/constants";
 import SignInModal from "@/components/modal/signInModal/signInModal";
 import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
-import HeaderList from "@/components/header/components/headerList";
+import HeaderNav from "@/components/header/components/headerNav";
 import { logOutAction, registerClickAction, signInModalActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 
@@ -34,7 +34,7 @@ const Header: React.FunctionComponent = function () {
         Game Store
       </Link>
       <div className={header.wrapper}>
-        <HeaderList headerMenuArr={headerData} root />
+        <HeaderNav headerMenuArr={headerData} root />
         <ul className={header.menu}>
           {authorized ? (
             <>

@@ -21,9 +21,10 @@ const RegistrationModal: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(registrationAction(data));
+    body.style.overflow="auto"
   };
   if (authorized) {
     history.push("/profile");
