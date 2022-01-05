@@ -12,6 +12,9 @@
 footer {
   @include builder(flex, space-between, 100%);
   background: $bg;
+  top: 100%;
+  position: absolute;
+  left: 0;
 
   a {
     text-decoration: none;
