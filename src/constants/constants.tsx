@@ -4,15 +4,15 @@ import { DropdownAndCategory } from "../types/types";
 export const data: Array<DropdownAndCategory> = [
   {
     id: 1,
-    link: "pc",
+    link: "PC",
   },
   {
     id: 2,
-    link: "playstation",
+    link: "Playstation5",
   },
   {
     id: 3,
-    link: "xbox",
+    link: "XBox",
   },
 ];
 export const links = {
@@ -43,11 +43,6 @@ const menuData = {
       label: "PC",
       path: "/products/pc",
     },
-    playStation: {
-      id: 4,
-      label: "Playstation",
-      path: "/products/playstation",
-    },
   },
   about: {
     id: 4,
@@ -60,7 +55,7 @@ export const headerData = [
   menuData.home,
   {
     ...menuData.products.base,
-    sub: [menuData.products.pc, menuData.products.xbox, menuData.products.playStation],
+    sub: [menuData.products.pc, menuData.products.xbox],
   },
   menuData.about,
 ];

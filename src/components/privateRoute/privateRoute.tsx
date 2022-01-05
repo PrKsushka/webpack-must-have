@@ -8,10 +8,9 @@ type RouterPrivate = {
   component: any;
   auth: boolean;
   path: string;
-  exact?: boolean;
 };
 const PrivateRoute = function ({ component: Component, auth, ...rest }: RouterPrivate) {
-  const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
+  const active=useSelector<RootState, boolean>((state)=>state.auth.modalActive);
   if(!active || auth){
     window.history.replaceState(null, "", "/");
   }
@@ -20,10 +19,11 @@ const PrivateRoute = function ({ component: Component, auth, ...rest }: RouterPr
       {...rest}
       render={(props) =>
         !auth ? (
-          <Redirect to={{ pathname: `${links.home}`, search: `signIn=${auth}`, state: { from: props.location, show: true } }}
+          <Redirect
+            to={{ pathname: `${links.home}`, search: `signIn=${auth}`, state: { from: props.location, show: true } }}
           />
         ) : (
-          <Component {...props} {...rest} />
+          <Component {...props} />
         )
       }
     />

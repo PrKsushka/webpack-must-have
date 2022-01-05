@@ -8,7 +8,6 @@
   padding: 0 40px 0 40px;
   box-sizing: border-box;
   align-items: center;
-  flex: 0 0 auto;
 
   .logo {
     @include fonts("Roboto", 30px, $w);

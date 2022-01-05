@@ -28,21 +28,19 @@ export interface ShowModalLocation {
   from: ShowModalType;
   show: boolean;
 }
-export interface Rating {
+interface Rating {
   rate: number;
   count: number;
 }
 export interface TopProduct {
-  id?: number;
-  title?: string;
-  price?: number;
-  description?: string;
-  category?: string;
-  genres?: string;
-  age?: string;
-  image?: string;
-  date?: string;
-  rating?: Rating;
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  date: string;
+  rating: Rating;
 }
 export interface dataForm {
   name: string;

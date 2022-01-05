@@ -3,7 +3,7 @@ import axios from "axios";
 import MoonLoader from "react-spinners/MoonLoader";
 import s from "./searchInput.module.scss";
 import useDebounce from "../../hooks/debounceHook/debounceHook";
-import { Product, TopProduct } from "@/types/types";
+import { Product } from "@/types/types";
 
 const SearchInput: React.FunctionComponent = function () {
   const [input, setInput] = useState<string>("");
@@ -20,8 +20,7 @@ const SearchInput: React.FunctionComponent = function () {
     alert("add");
   };
   const prepareUrl = (query: string) => {
-    const url = `/api/search/${query}`;
-    console.log(encodeURI(url));
+    const url = `https://jsonplaceholder.typicode.com/posts?q=${query}`;
     return encodeURI(url);
   };
 
@@ -39,9 +38,8 @@ const SearchInput: React.FunctionComponent = function () {
     }
   };
   useDebounce(input, 500, searchName);
-  // const printInformation = (arr: Array<Product>) =>
-  //   arr.filter((val: Product) => val.title.toLowerCase().includes(input.toLowerCase()));
-
+  const printInformation = (arr: Array<Product>) =>
+    arr.filter((val: Product) => val.title.toLowerCase().includes(input.toLowerCase()));
   return (
     <div className={s.search}>
       <input
@@ -56,11 +54,9 @@ const SearchInput: React.FunctionComponent = function () {
       />
       {isLoading && <MoonLoader loading color="#000" size={20} />}
       {isExpanded && input !== ""
-        ? postFound.map((val: TopProduct) => (
+        ? printInformation(postFound).map((val: Product) => (
             <div key={val.id} onClick={postAlert} className={s.foundElements}>
-              <img src={val.image} alt="found Picture"/>
-              <p>{val.title}</p>
-              <p>{val.price}$</p>
+              {val.title}
             </div>
           ))
         : input === ""}

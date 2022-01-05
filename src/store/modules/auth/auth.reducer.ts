@@ -14,9 +14,9 @@ import {
   SIGN_IN_PARAMS_ACTION,
 } from "@/store/modules/auth/auth.constants";
 
-import { AuthStateTypes } from "@/store/types";
+import { initialStateTypes } from "@/store/types";
 
-const initialState: AuthStateTypes = {
+const initialState: initialStateTypes = {
   userData: {},
   authorized: false,
   errorMessage: "",

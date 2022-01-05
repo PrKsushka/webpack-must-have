@@ -4,7 +4,6 @@ import data from "./data.json";
 import { TopProduct } from "@/types/types";
 
 export default webpackMockServer.add((app, helper) => {
-  const arrData = data;
   app.get("/testMock", (_req, res) => {
     const response = {
       id: helper.getUniqueIdInt(),
@@ -54,73 +53,21 @@ export default webpackMockServer.add((app, helper) => {
       password: req.body.password,
     });
   });
-  app.get("/api/products", (_req, res) => {
-    arrData.sort((a, b) => a.id - b.id);
-    if (_req.query.sortPrice === "asc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
-        const c = <number>a.price;
-        const d = <number>b.price;
-        return c - d;
-      });
-    }
-    if (_req.query.sortPrice === "desc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
-        const c = <number>b.price;
-        const d = <number>a.price;
-        return c - d;
-      });
-    }
-    if (_req.query.sortRate === "asc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
-        const c = <number>a.rating?.rate;
-        const d = <number>b.rating?.rate;
-        return c - d;
-      });
-    }
-    if (_req.query.sortRate === "desc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
-        const c = <number>b.rating?.rate;
-        const d = <number>a.rating?.rate;
-        return c - d;
-      });
-    }
-    let newSortArr;
-
-    if (_req.query.genre) {
-      newSortArr = arrData.filter((elem) => _req.query.genre === elem.genres);
-      if (_req.query.genre !== "all") {
-        res.json(newSortArr);
-      }
-      return;
-    }
-    if (_req.query.userAge) {
-      newSortArr = arrData.filter(
-        (elem) => elem.age.replace("+", " ") === decodeURIComponent(`${_req.query.userAge}`.replace(/"%22"/g, ""))
-      );
-      if (_req.query.userAge !== "all") {
-        res.json(newSortArr);
-      }
-      return;
-    }
-
-    res.json(arrData);
+  app.get("/api/getProducts", (_req, res) => {
+    // res.sendFile(require.resolve("./data.json"));
+    res.json(data);
   });
 
   app.get("/api/getTopProducts", (_req, res) => {
-    const result = data.sort((a: TopProduct, b: TopProduct) => Date.parse(<string>b.date) - Date.parse(<string>a.date));
-    res.json(result);
+    data.sort((a: TopProduct, b: TopProduct) => {
+      const c: Date | unknown = new Date(b.date);
+      const d: Date | unknown = new Date(a.date);
+      return c - d;
+    });
+    // res.sendFile(require.resolve("./data.json"));
+    res.json(data);
   });
 
-  app.get(`/api/search/:text`, (_req, res) => {
-    const searchVal = decodeURIComponent(`${_req.params.text}`.replace(/\+/g, "%20")).toLowerCase();
-    const result = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].title.toLowerCase().includes(searchVal)) {
-        result.push(data[i]);
-      }
-    }
-    res.json(result);
-  });
   app.post("/api/saveProfile", (req, res) => {
     if (!req.body) {
       return res.status(400).json({

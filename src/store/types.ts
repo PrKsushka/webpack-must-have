@@ -1,4 +1,4 @@
-export interface AuthStateTypes {
+export interface initialStateTypes {
   userData: object;
   authorized: boolean;
   errorMessage: string;
@@ -7,10 +7,4 @@ export interface AuthStateTypes {
   userSignIn: boolean;
   userRegister: boolean;
   signInMenu: boolean;
-}
-export interface ProductStateTypes {
-  allProducts: Array<object>;
-  sortByCategory: Array<object>;
-  errorMessage: string;
-  successMessage: string;
 }
