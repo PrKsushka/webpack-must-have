@@ -22,11 +22,11 @@ const App: React.FunctionComponent = function () {
       <Layout>
         <Switch>
           <ErrorBoundary>
-            <Route exact path={links.home} component={() => <Home />} />
-            <PrivateRoute path={links.profile} component={() => <Profile />} auth={authorized} />
-            <PrivateRoute path={links.products} component={() => <Product />} auth={authorized} />
-            <PrivateRoute path={`${links.products}/:platform`} component={() => <Product />} auth={authorized} />
-            <PrivateRoute path={links.about} component={() => <About />} auth={authorized} />
+            <Route exact path={links.home} component={Home} />
+            <PrivateRoute path={links.profile} component={Profile} auth={authorized} />
+            <PrivateRoute exact path={links.products} component={Product} auth={authorized} />
+            <PrivateRoute path={`${links.products}/:platform`} component={Product} auth={authorized} />
+            <PrivateRoute path={links.about} component={About} auth={authorized} />
           </ErrorBoundary>
         </Switch>
       </Layout>

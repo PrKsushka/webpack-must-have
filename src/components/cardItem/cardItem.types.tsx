@@ -1,8 +1,5 @@
-interface Card {
-  image: string;
-  title: string;
-  price: number;
-}
+import { TopProduct } from "@/types/types";
+
 export interface CardProps {
-  item: Card;
+  item: TopProduct;
 }

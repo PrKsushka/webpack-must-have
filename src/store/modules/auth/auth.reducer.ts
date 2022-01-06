@@ -14,9 +14,9 @@ import {
   SIGN_IN_PARAMS_ACTION,
 } from "@/store/modules/auth/auth.constants";
 
-import { initialStateTypes } from "@/store/types";
+import { AuthStateTypes } from "@/store/types";
 
-const initialState: initialStateTypes = {
+const initialState: AuthStateTypes = {
   userData: {},
   authorized: false,
   errorMessage: "",
@@ -26,8 +26,11 @@ const initialState: initialStateTypes = {
   userRegister: false,
   signInMenu: false,
 };
-// eslint-disable-next-line default-param-last
-const authReducer = (state = initialState, action: unknown) => {
+type AuthAction = {
+  type: string;
+  payload?: Array<object> | object | unknown;
+};
+const authReducer = (state = initialState, action: AuthAction = { type: "DEFAULT" }) => {
   switch (action.type) {
     case SIGN_IN_CONFIRMED_ACTION:
       return {

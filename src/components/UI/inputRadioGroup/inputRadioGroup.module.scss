@@ -1,0 +1,11 @@
+@import "../../../styles/mixin";
+
+.radioButtonGroup {
+  @include builder(flex, flex-start, 100%);
+  flex-direction: column;
+
+  .wrapper {
+    @include fonts("Roboto", 18px, $w);
+    margin-bottom: 4px;
+  }
+}

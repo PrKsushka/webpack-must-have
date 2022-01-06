@@ -8,36 +8,92 @@
   height: $h;
 }
 
-.cardItem {
-  @include setSize(250px, 360px);
-  background: $darkPurple;
-  border-radius: 27px;
+.block {
+  width: 250px;
+  min-height: 350px;
+  margin-bottom: 40px;
 
-  &:hover {
-    box-shadow: 0 0 9px 4px rgba(163, 27, 226, 0.52);
-  }
+  .theCard {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
 
-  .cardPicture {
-    border-radius: 27px 27px 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    @include setSize(100%, 260px);
-  }
-
-  .infoWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 20px;
-
-    .title {
-      @include fonts("Roboto", 14px, $w);
+    &:hover {
+      transform: rotateY(180deg);
+      box-shadow: 0 0 9px 4px rgba(163, 27, 226, 0.52);
     }
 
-    .price {
-      @include fonts("Roboto", 16px, $w);
+    .frontSide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      overflow: hidden;
+      background: $darkPurple;
+      color: #000;
+      border-radius: 20px;
+
+      .cardPicture {
+        border-radius: 20px 20px 0 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include setSize(100%, 260px);
+      }
+
+      .infoWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+
+        .title {
+          @include fonts("Roboto", 14px, $w);
+        }
+
+        .rating {
+          @include fonts("Roboto", 14px, $w);
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+        }
+
+        .price {
+          @include fonts("Roboto", 16px, $w);
+        }
+      }
+    }
+
+    .backSide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      backface-visibility: hidden;
+      overflow: hidden;
+      background: $darkPurple;
+      color: #333;
+      text-align: center;
+      transform: rotateY(180deg);
+
+      .addToCart {
+        background: rgba(131, 0, 193, 0.38);
+        border-radius: 52px;
+        border: none;
+        padding: 16px 20px;
+        @include fonts("Roboto", 14px, $w);
+        cursor: pointer;
+      }
     }
   }
 }
