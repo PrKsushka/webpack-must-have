@@ -26,8 +26,11 @@ const initialState: AuthStateTypes = {
   userRegister: false,
   signInMenu: false,
 };
-// eslint-disable-next-line default-param-last
-const authReducer = (state = initialState, action: unknown) => {
+type AuthAction = {
+  type: string;
+  payload?: Array<object> | object | unknown;
+};
+const authReducer = (state = initialState, action: AuthAction = { type: "DEFAULT" }) => {
   switch (action.type) {
     case SIGN_IN_CONFIRMED_ACTION:
       return {

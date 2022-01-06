@@ -91,9 +91,7 @@
         border-radius: 52px;
         border: none;
         padding: 16px 20px;
-        font-family: "Roboto", sans-serif;
-        font-size: 14px;
-        color: white;
+        @include fonts("Roboto", 14px, $w);
         cursor: pointer;
       }
     }

@@ -1,5 +1,5 @@
 import { Action, Dispatch } from "redux";
-import { dataAboutProducts, sortDataByAge, sortDataByGenre, sortDataByType } from "@/api/dataAboutProducts";
+import { getProducts, getProductsByAge, getProductsByGenre, getProductsByType } from "@/api/dataAboutProducts";
 import {
   DATA_SORTED_BY_AGE_CONFIRMED_ACTION,
   DATA_SORTED_BY_AGE_FAILED_ACTION,
@@ -28,7 +28,7 @@ export function getDataAboutProductsFailedAction(message: string) {
 }
 export function getDataAboutProducts() {
   return (dispatch: Dispatch<Action>) => {
-    dataAboutProducts()
+    getProducts()
       .then((res) => {
         if (res.data) {
           dispatch(getDataAboutProductsConfirmedAction(res.data));
@@ -61,7 +61,7 @@ export function dataSortedByRatingFailedAction(message: string) {
 }
 export function dataSortedByRating(value: string) {
   return (dispatch: Dispatch<Action>) => {
-    sortDataByType("sortRate", value)
+    getProductsByType("sortRate", value)
       .then((res) => {
         if (res.data) {
           dispatch(dataSortedByRatingConfirmedAction(res.data));
@@ -88,7 +88,7 @@ export function dataSortedByPriceFailedAction(message: string) {
 }
 export function dataSortedByPrice(value: string) {
   return (dispatch: Dispatch<Action>) => {
-    sortDataByType("sortPrice", value)
+    getProductsByType("sortPrice", value)
       .then((res) => {
         if (res.data) {
           dispatch(dataSortedByPriceConfirmedAction(res.data));
@@ -115,7 +115,7 @@ export function dataSortedByGenreFailedAction(message: string) {
 }
 export function dataSortedByGenre(value: string) {
   return (dispatch: Dispatch<Action>) => {
-    sortDataByGenre(value)
+    getProductsByGenre(value)
       .then((res) => {
         if (res.data) {
           dispatch(dataSortedByGenreConfirmedAction(res.data));
@@ -142,7 +142,7 @@ export function dataSortedByAgeFailedAction(message: string) {
 }
 export function dataSortedByAge(value: string) {
   return (dispatch: Dispatch<Action>) => {
-    sortDataByAge(value)
+    getProductsByAge(value)
       .then((res) => {
         if (res.data) {
           dispatch(dataSortedByAgeConfirmedAction(res.data));

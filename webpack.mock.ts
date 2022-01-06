@@ -94,8 +94,9 @@ export default webpackMockServer.add((app, helper) => {
       return;
     }
     if (_req.query.userAge) {
+      console.log("1");
       newSortArr = arrData.filter(
-        (elem) => elem.age.replace("+", " ") === decodeURIComponent(`${_req.query.userAge}`.replace(/"%22"/g, ""))
+        (elem) => elem.age.replace("+", " ") === decodeURIComponent(`${_req.query.userAge}`.replace(/"%2B"/g, ""))
       );
       if (_req.query.userAge !== "all") {
         res.json(newSortArr);

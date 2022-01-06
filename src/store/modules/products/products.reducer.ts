@@ -18,8 +18,11 @@ const initialState: ProductStateTypes = {
   errorMessage: "",
   successMessage: "",
 };
-// eslint-disable-next-line default-param-last
-const productReducer = (state = initialState, action: unknown) => {
+type ProductAcion = {
+  type: string;
+  payload?: Array<object> | object | unknown;
+};
+const productReducer = (state = initialState, action: ProductAcion = { type: "DEFAULT" }) => {
   switch (action.type) {
     case GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION:
       return {
@@ -61,7 +64,7 @@ const productReducer = (state = initialState, action: unknown) => {
     case DATA_SORTED_BY_AGE_CONFIRMED_ACTION:
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
         successMessage: "data sorted by age",
       };
     case DATA_SORTED_BY_AGE_FAILED_ACTION:
@@ -74,7 +77,7 @@ const productReducer = (state = initialState, action: unknown) => {
     case DATA_SORTED_BY_GENRE_CONFIRMED_ACTION:
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
         successMessage: "data sorted by age",
       };
     case DATA_SORTED_BY_GENRE_FAILED_ACTION:
