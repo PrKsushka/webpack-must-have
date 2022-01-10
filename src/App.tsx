@@ -10,6 +10,7 @@ import ErrorBoundary from "./components/errorBoundary/errorBoundary";
 import Profile from "@/pages/profile/profile";
 import PrivateRoute from "./components/privateRoute/privateRoute";
 import { RootState } from "@/main";
+import Cart from "@/pages/cart/cart";
 
 const App: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
@@ -27,6 +28,7 @@ const App: React.FunctionComponent = function () {
             <PrivateRoute exact path={links.products} component={Product} auth={authorized} />
             <PrivateRoute path={`${links.products}/:platform`} component={Product} auth={authorized} />
             <PrivateRoute path={links.about} component={About} auth={authorized} />
+            <PrivateRoute path={links.cart} component={Cart} auth={authorized} />
           </ErrorBoundary>
         </Switch>
       </Layout>

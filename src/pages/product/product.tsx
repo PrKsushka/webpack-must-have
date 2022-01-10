@@ -13,7 +13,7 @@ import SortAscDesc from "@/components/modules/product/sortAscDesc";
 
 const Product: React.FunctionComponent = function () {
   const dispatch = useDispatch();
-  const [selected, setSelected] = useState("Sort");
+  const [selected, setSelected] = useState("Products");
   const [loader, showLoader, hideloader] = usePreloader();
   const [selectedRadioButton, setSelectedRadioButton] = useState("all");
   useEffect(() => {

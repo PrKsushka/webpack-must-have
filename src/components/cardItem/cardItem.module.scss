@@ -52,18 +52,11 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 0 20px 0 11px;
 
         .title {
           @include fonts("Roboto", 14px, $w);
-        }
-
-        .rating {
-          @include fonts("Roboto", 14px, $w);
-          display: flex;
-          width: 100%;
-          justify-content: center;
-          margin: 0;
         }
 
         .price {

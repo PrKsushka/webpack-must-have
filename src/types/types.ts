@@ -30,7 +30,6 @@ export interface ShowModalLocation {
 }
 export interface Rating {
   rate: number;
-  count: number;
 }
 export interface TopProduct {
   id?: number;
@@ -42,6 +41,8 @@ export interface TopProduct {
   age?: string;
   image?: string;
   date?: string;
+  quantity?: number;
+  count?: number;
   rating?: Rating;
 }
 export interface dataForm {

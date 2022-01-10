@@ -1,0 +1,41 @@
+@import "src/styles/mixin";
+
+.title {
+  @include fonts("Roboto", 25px, $w);
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px solid;
+  margin: 0 15px 0 15px;
+}
+
+table {
+  width: 100%;
+  padding: 50px;
+
+  tr {
+    border-bottom: $w;
+
+    td {
+      @include fonts("Roboto", 18px, $w);
+
+      .changeCount {
+        background: rgba(131, 0, 193, 0.38);
+        border-radius: 50px;
+        border: none;
+        padding: 16px 20px;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  thead {
+    tr {
+      td {
+        @include fonts("Roboto", 21px, $w);
+      }
+    }
+  }
+}
