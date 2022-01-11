@@ -9,8 +9,8 @@ const CardItem: React.FunctionComponent<CardProps> = function ({
   item: { id, image, title, price, rating, description },
 }) {
   const dispatch = useDispatch();
-  const addToCart = (el: number | undefined) => {
-    dispatch(addToCartAction(el));
+  const addToCart = () => {
+    (id!==undefined)?dispatch(addToCartAction(id)):null;
   };
   return (
     <div id="block" className={card.block}>
@@ -26,7 +26,7 @@ const CardItem: React.FunctionComponent<CardProps> = function ({
 
         <div className={card.backSide}>
           <p>{description}</p>
-          <button className={card.addToCart} onClick={() => addToCart(id)}>
+          <button className={card.addToCart} onClick={addToCart}>
             Add to cart
           </button>
         </div>

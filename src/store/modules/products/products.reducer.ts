@@ -96,9 +96,11 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
     case ADD_TO_CART_ACTION: {
       const foundProduct = state.allProducts.find((el: TopProduct) => el.id === action.payload);
       const newCart = [...state.cart];
-      if (foundProduct && newCart) {
+
+      if (foundProduct) {
         const countOfProduct = foundProduct.count;
         const foundIndex = newCart.findIndex((el: TopProduct) => el.id === foundProduct?.id);
+
         if (foundIndex >= 0) {
           const newQuantity = Number(newCart[foundIndex].quantity + foundProduct.quantity);
           if (countOfProduct && newQuantity <= countOfProduct)

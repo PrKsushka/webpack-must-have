@@ -8,8 +8,8 @@ import RegistrationModal from "@/components/modal/registrationModal/registration
 import HeaderNav from "@/components/header/components/headerNav";
 import { logOutAction, registerClickAction, signInModalActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
-import { TopProduct } from "@/types/types";
 import cart from "../../assets/images/cart.png";
+import { countOfProductsInShoppingCart } from "@/store/modules/products/product.selectors";
 
 const Header: React.FunctionComponent = function () {
   const dispatch = useDispatch();
@@ -30,11 +30,11 @@ const Header: React.FunctionComponent = function () {
     history.push("/");
     window.history.replaceState({}, document.title);
   };
-  const productsInCart = useSelector<RootState, Array<object>>((state) => state.products.cart);
-  let res: number | undefined = 0;
-  if (productsInCart.length !== 0) {
-    res = productsInCart.map((el: TopProduct) => el.quantity).reduce((sum, curr) => Number(sum) + Number(curr));
-  }
+
+
+  // @ts-ignore
+  const count = useSelector<RootState, number>((state) => countOfProductsInShoppingCart(state));
+
   return (
     <header className={header.main}>
       <Link to={links.home} className={header.logo}>
@@ -51,7 +51,7 @@ const Header: React.FunctionComponent = function () {
               <li className={header.buttons}>
                 <Link to={links.cart}>
                   <img src={cart} alt="cart" />
-                  {res}
+                  {count}
                 </Link>
               </li>
               <li className={header.buttons} onClick={logOut}>

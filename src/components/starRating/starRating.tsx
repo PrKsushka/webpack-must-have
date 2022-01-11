@@ -14,10 +14,7 @@ const StarRating: React.FunctionComponent<StarRating> = function ({
   return (
     <div className={s.star}>
       {stars.map((el, index) => {
-        let style = inactiveColor;
-        if (rating !== undefined && index + 1 <= Math.round(rating)) {
-          style = activeColor;
-        }
+        let style = (rating !== undefined) && (index +1 <= Math.round(rating)) ? activeColor : inactiveColor
         return (
           <span key={index} style={{ color: style, fontSize: size }}>
             {el}

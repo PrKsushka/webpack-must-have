@@ -6,12 +6,12 @@ import { RootState } from "@/main";
 
 type RouterPrivate = {
   component: any;
-  auth: boolean;
   path: string;
   exact?: boolean;
 };
-const PrivateRoute = function ({ component: Component, auth, ...rest }: RouterPrivate) {
+const PrivateRoute = function ({ component: Component, ...rest }: RouterPrivate) {
   const active = useSelector<RootState, boolean>((state) => state.auth.modalActive);
+  const auth = useSelector<RootState, boolean>((state) => state.auth.authorized);
   if(!active || auth){
     window.history.replaceState(null, "", "/");
   }

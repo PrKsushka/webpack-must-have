@@ -1,7 +1,7 @@
+@import "src/styles/mixin";
+
 .star {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
+  @include builder(flex, flex-start, 100%);
   align-items: self-end;
   font-size: 14px;
 }
