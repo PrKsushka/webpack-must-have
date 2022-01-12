@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpackMockServer from "webpack-mock-server";
 import data from "./data.json";
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
 
 export default webpackMockServer.add((app, helper) => {
   const arrData = data;

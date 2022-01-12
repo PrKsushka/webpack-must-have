@@ -10,13 +10,16 @@ import { logOutAction, registerClickAction, signInModalActive } from "@/store/mo
 import { RootState } from "@/main";
 import cart from "../../assets/images/cart.png";
 import { countOfProductsInShoppingCart } from "@/store/modules/products/product.selectors";
+import { StoreState } from "@/store/types";
 
 const Header: React.FunctionComponent = function () {
   const dispatch = useDispatch();
-  const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
-  const name = useSelector<RootState, string>((state) => state.auth.userData.name);
-  const userSignIn = useSelector<RootState, boolean>((state) => state.auth.userSignIn);
-  const userRegister = useSelector<RootState, boolean>((state) => state.auth.userRegister);
+  const authorized = useSelector<RootState, boolean>((state: StoreState) => state.auth.authorized);
+  const name = useSelector<RootState, string>((state: StoreState) => state.auth.userData.name);
+  const userSignIn = useSelector<RootState, boolean>((state: StoreState) => state.auth.userSignIn);
+  const userRegister = useSelector<RootState, boolean>((state: StoreState) => state.auth.userRegister);
+  const count = useSelector<RootState, number>((state: StoreState) => countOfProductsInShoppingCart(state));
+
   const signIn = () => {
     dispatch(signInModalActive());
   };
@@ -32,8 +35,6 @@ const Header: React.FunctionComponent = function () {
   };
 
 
-  // @ts-ignore
-  const count = useSelector<RootState, number>((state) => countOfProductsInShoppingCart(state));
 
   return (
     <header className={header.main}>

@@ -1,4 +1,4 @@
-import { DropdownAndCategory } from "../types/types";
+import { DropdownAndCategory } from "../types/dropDownMenu.types";
 
 
 export const data: Array<DropdownAndCategory> = [

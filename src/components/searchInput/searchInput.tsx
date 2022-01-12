@@ -3,7 +3,7 @@ import axios from "axios";
 import MoonLoader from "react-spinners/MoonLoader";
 import s from "./searchInput.module.scss";
 import useDebounce from "../../hooks/debounceHook/debounceHook";
-import { Product, TopProduct } from "@/types/types";
+import { Product, TopProduct } from "@/types/productsCommon.types";
 
 const SearchInput: React.FunctionComponent = function () {
   const [input, setInput] = useState<string>("");

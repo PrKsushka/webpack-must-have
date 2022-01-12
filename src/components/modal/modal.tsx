@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import modal from "./modal.module.scss";
 import { setModalInActive } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
+import { StoreState } from "@/store/types";
 
 interface Modal {
   children: ReactElement;
@@ -12,13 +13,13 @@ interface Modal {
 const Modal: React.FunctionComponent<Modal> = function ({ children }) {
   const dispatch = useDispatch();
   const { body } = document;
-  const isActive = useSelector<RootState, boolean>((state) => state.auth.modalActive);
+  const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   const closeModal = () => {
     dispatch(setModalInActive());
     body.style.overflow = "auto";
   };
   useEffect(() => {
-    (isActive)?body.style.overflow = "hidden":body.style.overflow = "auto";
+    (isActive) ? body.style.overflow = "hidden":body.style.overflow = "auto";
   }, [isActive]);
   return ReactDom.createPortal(
     <div className={isActive ? modal.active : modal.modal}>

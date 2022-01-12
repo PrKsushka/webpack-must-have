@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
 import styles from "@/pages/cart/cart.module.scss";
 import { RootState } from "@/main";
 import changeDate from "@/utils/date";
@@ -9,12 +9,13 @@ import {
   increaseCountAction,
   removeFromCartAction,
 } from "@/store/modules/products/products.actions";
+import { StoreState } from "@/store/types";
 type DeleteProductFunc = {
   id?: number;
   e: React.ChangeEvent<HTMLInputElement>;
 };
 const Tbody: React.FunctionComponent = function () {
-  const cart = useSelector<RootState, Array<object>>((state) => state.products.cart);
+  const cart = useSelector<RootState, Array<object>>((state: StoreState) => state.products.cart);
   const [checkedForDelete, setCheckedForDelete] = useState(true);
 
   const orderDate = changeDate();

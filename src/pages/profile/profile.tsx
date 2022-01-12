@@ -6,10 +6,11 @@ import profile from "./profile.module.scss";
 import { RootState } from "@/main";
 import InfoAboutUser from "@/components/modules/profile/infoAboutUser";
 import profileImage from "../../assets/images/noPictureLeft.png";
+import { StoreState } from "@/store/types";
 const RegistrationModal: React.FunctionComponent = function () {
   const [activeChangePasswordModal, setActiveChanePassword] = useState(false);
   const dispatch = useDispatch();
-  const name = useSelector<RootState, string>((state) => state.auth.userData.name);
+  const name = useSelector<RootState, string>((state: StoreState) => state.auth.userData.name);
   const showChangePasswordModal = () => {
     dispatch(setModalActive());
     setActiveChanePassword(true);

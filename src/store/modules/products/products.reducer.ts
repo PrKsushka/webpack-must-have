@@ -15,7 +15,7 @@ import {
   REMOVE_FROM_CART_ACTION,
 } from "@/store/modules/products/products.constants";
 import { ProductStateTypes } from "@/store/types";
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
 
 const initialState: ProductStateTypes = {
   allProducts: [],

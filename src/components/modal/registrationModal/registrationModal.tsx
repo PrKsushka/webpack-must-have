@@ -9,8 +9,9 @@ import { registrationAction } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
-import { dataForm } from "@/types/types";
+import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+import { StoreState } from "@/store/types";
 
 const RegistrationModal: React.FunctionComponent = function () {
   const {
@@ -18,7 +19,7 @@ const RegistrationModal: React.FunctionComponent = function () {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
-  const authorized = useSelector<RootState, boolean>((state) => state.auth.authorized);
+  const authorized = useSelector<RootState, boolean>((state: StoreState) => state.auth.authorized);
   const history = useHistory();
   const dispatch = useDispatch();
   const { body } = document;

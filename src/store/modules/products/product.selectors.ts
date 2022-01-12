@@ -1,7 +1,8 @@
 import { createSelector } from "reselect";
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
+import { StoreState } from "@/store/types";
 
-const shoppingCart = (state: unknown) => state.products.cart;
+const shoppingCart = (state: StoreState) => state.products.cart;
 
 export const productsInShoppingCart = createSelector(shoppingCart, (items) => items);
 
@@ -15,9 +16,9 @@ export const totalPrice = createSelector(productsInShoppingCart, (items) => {
   return 0;
 });
 
-export const countOfProductsInShoppingCart = createSelector([productsInShoppingCart], (items) => {
+export const countOfProductsInShoppingCart = createSelector(productsInShoppingCart, (items: TopProduct[]): number => {
   if (items.length !== 0) {
-    return items.map((el: TopProduct) => el.quantity).reduce((sum: number, curr: number) => Number(sum) + Number(curr));
+    return items.reduce((sum: number, item: TopProduct) => sum + Number(item.quantity), 0);
   }
 
   return 0;

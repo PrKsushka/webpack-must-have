@@ -1,4 +1,4 @@
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
 
 export interface CardProps {
   item: TopProduct;

@@ -1,4 +1,4 @@
-import { Rating } from "@/types/types";
+import { Rating } from "@/types/productsCommon.types";
 
 interface ProductReducer {
   id: number;
@@ -14,8 +14,12 @@ interface ProductReducer {
   count: number;
   rating: Rating;
 }
+type UserData = {
+  name: string;
+  password: string;
+};
 export interface AuthStateTypes {
-  userData: object;
+  userData: UserData;
   authorized: boolean;
   errorMessage: string;
   successMessage: string;
@@ -30,4 +34,8 @@ export interface ProductStateTypes {
   errorMessage: string;
   successMessage: string;
   cart: Array<ProductReducer>;
+}
+export interface StoreState {
+  auth: AuthStateTypes;
+  products: ProductStateTypes;
 }

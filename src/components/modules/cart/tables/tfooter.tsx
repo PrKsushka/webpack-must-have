@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "@/pages/cart/cart.module.scss";
 interface TfooterTypes {
-  res: string;
+  res: number | string;
   showShoppingModal: any;
 }
-const Tfooter: React.FunctionComponent<TfooterTypes> = function ({res, showShoppingModal }) {
+const Tfooter: React.FunctionComponent<TfooterTypes> = function ({ res, showShoppingModal }) {
   return (
     <tfoot>
       <tr>
