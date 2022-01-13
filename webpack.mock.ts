@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpackMockServer from "webpack-mock-server";
 import data from "./data.json";
-import { TopProduct } from "@/types/types";
+import { TopProduct } from "@/types/productsCommon.types";
 
 export default webpackMockServer.add((app, helper) => {
   const arrData = data;
@@ -94,7 +94,6 @@ export default webpackMockServer.add((app, helper) => {
       return;
     }
     if (_req.query.userAge) {
-      console.log("1");
       newSortArr = arrData.filter(
         (elem) => elem.age.replace("+", " ") === decodeURIComponent(`${_req.query.userAge}`.replace(/"%2B"/g, ""))
       );

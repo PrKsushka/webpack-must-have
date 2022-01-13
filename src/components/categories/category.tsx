@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { data, links } from "../../constants/constants";
 import category from "./category.module.scss";
-import { DropdownAndCategory } from "../../types/types";
+import { DropdownAndCategory } from "../../types/dropDownMenu.types";
 
 const Category: React.FunctionComponent = function () {
   return (

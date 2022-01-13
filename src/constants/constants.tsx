@@ -1,4 +1,4 @@
-import { DropdownAndCategory } from "../types/types";
+import { DropdownAndCategory } from "../types/dropDownMenu.types";
 
 
 export const data: Array<DropdownAndCategory> = [
@@ -20,6 +20,7 @@ export const links = {
   products: "/products",
   about: "/about",
   profile: "/profile",
+  cart: "/cart",
 };
 const menuData = {
   home: {

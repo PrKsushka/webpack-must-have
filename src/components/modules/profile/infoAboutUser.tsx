@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
-import { dataForm } from "@/types/types";
+import { dataForm } from "@/types/productsCommon.types";
 import { changeDataAboutUserAction } from "@/store/modules/auth/auth.actions";
 import signin from "@/components/UI/input/input.module.scss";
 import Input from "@/components/UI/input/input";

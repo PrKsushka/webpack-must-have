@@ -1,5 +1,5 @@
 import axios from "axios";
-import { signInRegistraionPostDataTypes } from "../types/types";
+import { signInRegistraionPostDataTypes } from "../types/logInLogOutCommon.types";
 
 export const signInPostData = ({ formData }: signInRegistraionPostDataTypes) =>
   axios.post("/api/auth/signIn", formData);

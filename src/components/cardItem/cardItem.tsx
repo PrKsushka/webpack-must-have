@@ -1,16 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import card from "./cardItem.module.scss";
 import { CardProps } from "./cardItem.types";
+import StarRating from "@/components/starRating/starRating";
+import { addToCartAction } from "@/store/modules/products/products.actions";
 
 const CardItem: React.FunctionComponent<CardProps> = function ({
-  item: {
-    image,
-    title,
-    price,
-    rating,
-    description,
-  },
+  item: { id, image, title, price, rating, description },
 }) {
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    (id!==undefined)?dispatch(addToCartAction(id)):null;
+  };
   return (
     <div id="block" className={card.block}>
       <div className={card.theCard}>
@@ -19,13 +20,15 @@ const CardItem: React.FunctionComponent<CardProps> = function ({
           <div className={card.infoWrapper}>
             <p className={card.title}>{title}</p>
             <p className={card.price}>{price}$</p>
-            <p className={card.rating}>Rating {rating?.rate}</p>
+            <StarRating rating={rating?.rate} />
           </div>
         </div>
 
         <div className={card.backSide}>
           <p>{description}</p>
-          <button className={card.addToCart}>Add to cart</button>
+          <button className={card.addToCart} onClick={addToCart}>
+            Add to cart
+          </button>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Action, Dispatch } from "redux";
 import { getProducts, getProductsByAge, getProductsByGenre, getProductsByType } from "@/api/dataAboutProducts";
 import {
+  ADD_TO_CART_ACTION,
   DATA_SORTED_BY_AGE_CONFIRMED_ACTION,
   DATA_SORTED_BY_AGE_FAILED_ACTION,
   DATA_SORTED_BY_GENRE_CONFIRMED_ACTION,
@@ -9,8 +10,11 @@ import {
   DATA_SORTED_BY_PRICE_FAILED_ACTION,
   DATA_SORTED_BY_RATING_CONFIRMED_ACTION,
   DATA_SORTED_BY_RATING_FAILED_ACTION,
+  DECREASE_COUNT_ACTION,
   GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION,
   GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION,
+  INCREASE_COUNT_ACTION,
+  REMOVE_FROM_CART_ACTION,
   SORT_PRODUCTS_BY_CATEGORY,
 } from "@/store/modules/products/products.constants";
 
@@ -153,5 +157,29 @@ export function dataSortedByAge(value: string) {
       .catch((err) => {
         dispatch(dataSortedByAgeFailedAction(err));
       });
+  };
+}
+export function addToCartAction(id: number | undefined) {
+  return {
+    type: ADD_TO_CART_ACTION,
+    payload: id,
+  };
+}
+export function removeFromCartAction(id: number | undefined) {
+  return {
+    type: REMOVE_FROM_CART_ACTION,
+    payload: id,
+  };
+}
+export function increaseCountAction(id: number | undefined) {
+  return {
+    type: INCREASE_COUNT_ACTION,
+    payload: id,
+  };
+}
+export function decreaseCountAction(id: number | undefined) {
+  return {
+    type: DECREASE_COUNT_ACTION,
+    payload: id,
   };
 }

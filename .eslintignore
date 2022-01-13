@@ -31,4 +31,4 @@ node_modules
 #ignore checking assets folder
 assets/
 public/
-/**/*.d.ts
+/**/*.store.d.ts

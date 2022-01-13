@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/main";
 import { dataSortedByAge, dataSortedByGenre, getDataAboutProducts } from "@/store/modules/products/products.actions";
 import CardItem from "@/components/cardItem/cardItem";
-import { TopProduct } from "../../types/types";
+import { TopProduct } from "../../types/productsCommon.types";
 import product from "./product.module.scss";
 import InputRadio from "@/components/UI/inputRadioGroup/inputRadioGroup";
 import SearchInput from "@/components/searchInput/searchInput";
 import usePreloader from "@/hooks/preloaderHook/usePreloader";
 import SortAscDesc from "@/components/modules/product/sortAscDesc";
+import { StoreState } from "@/store/types";
 
 const Product: React.FunctionComponent = function () {
   const dispatch = useDispatch();
-  const [selected, setSelected] = useState("Sort");
+  const [selected, setSelected] = useState("Products");
   const [loader, showLoader, hideloader] = usePreloader();
   const [selectedRadioButton, setSelectedRadioButton] = useState("all");
   useEffect(() => {
@@ -21,7 +22,7 @@ const Product: React.FunctionComponent = function () {
     dispatch(getDataAboutProducts());
     hideloader();
   }, []);
-  const products = useSelector<RootState, Array<object>>((state) => state.products.allProducts);
+  const products = useSelector<RootState, Array<object>>((state: StoreState) => state.products.allProducts);
   function getRegistrationTokenFromLocation(pathName: string) {
     return pathName.slice(10);
   }

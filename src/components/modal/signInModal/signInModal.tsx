@@ -7,7 +7,7 @@ import Input from "@/components/UI/input/input";
 import { signInAction } from "@/store/modules/auth/auth.actions";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { dataForm } from "@/types/types";
+import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 
 

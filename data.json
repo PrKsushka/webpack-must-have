@@ -9,9 +9,10 @@
     "age": "3+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2020-03-02",
+    "quantity": 1,
+    "count": 2,
     "rating": {
-      "rate": 3.9,
-      "count": 120
+      "rate": 3.9
     }
   },
   {
@@ -24,9 +25,10 @@
     "age": "3+",
     "image": "https://phonoteka.org/uploads/posts/2021-05/1621492016_25-phonoteka_org-p-fioletovii-fon-art-30.jpg",
     "date": "2021-03-02",
+    "quantity": 1,
+    "count": 5,
     "rating": {
-      "rate": 4.1,
-      "count": 259
+      "rate": 4.1
     }
   },
   {
@@ -39,9 +41,10 @@
     "age": "12+",
     "image": "https://phonoteka.org/uploads/posts/2021-05/1621492016_25-phonoteka_org-p-fioletovii-fon-art-30.jpg",
     "date": "2021-05-02",
+    "quantity": 1,
+    "count": 500,
     "rating": {
-      "rate": 4.7,
-      "count": 500
+      "rate": 4.7
     }
   },
   {
@@ -54,9 +57,10 @@
     "age": "18+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-11-27",
+    "quantity": 1,
+    "count": 430,
     "rating": {
-      "rate": 2.1,
-      "count": 430
+      "rate": 2.1
     }
   },
   {
@@ -69,9 +73,10 @@
     "age": "6+",
     "image": "https://phonoteka.org/uploads/posts/2021-05/1621492016_25-phonoteka_org-p-fioletovii-fon-art-30.jpg",
     "date": "2021-11-02",
+    "quantity": 1,
+    "count": 400,
     "rating": {
-      "rate": 4.6,
-      "count": 400
+      "rate": 4.6
     }
   },
   {
@@ -82,11 +87,12 @@
     "category": "xbox",
     "genres": "shooter",
     "age": "18+",
-    "image": "https://www.digiseller.ru/preview/205254/p1_2879775_99bb718f.jpg",
+    "image": "https://torrentis.net/uploads/posts/2019-12/1482394485_sims-3-vse-dopolneniya-1.jpg",
     "date": "2021-11-06",
+    "quantity": 1,
+    "count": 400,
     "rating": {
-      "rate": 3.9,
-      "count": 70
+      "rate": 3.9
     }
   },
   {
@@ -98,10 +104,10 @@
     "genres": "simulation",
     "age": "3+",
     "image": "https://phonoteka.org/uploads/posts/2021-05/1621492016_25-phonoteka_org-p-fioletovii-fon-art-30.jpg",
-    "date": "2020-03-02",
+    "quantity": 1,
+    "count": 400,
     "rating": {
-      "rate": 3,
-      "count": 400
+      "rate": 3
     }
   },
   {
@@ -114,9 +120,10 @@
     "age": "12+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-07-02",
+    "quantity": 1,
+    "count": 100,
     "rating": {
-      "rate": 1.9,
-      "count": 100
+      "rate": 1.9
     }
   },
   {
@@ -129,9 +136,10 @@
     "age": "3+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-07-02",
+    "quantity": 1,
+    "count": 203,
     "rating": {
-      "rate": 3.3,
-      "count": 203
+      "rate": 3.3
     }
   },
   {
@@ -144,9 +152,10 @@
     "age": "6+",
     "image": "https://phonoteka.org/uploads/posts/2021-05/1621492016_25-phonoteka_org-p-fioletovii-fon-art-30.jpg",
     "date": "2020-07-10",
+    "quantity": 1,
+    "count": 470,
     "rating": {
-      "rate": 2.9,
-      "count": 470
+      "rate": 2.9
     }
   },
   {
@@ -157,11 +166,12 @@
     "category": "pc",
     "genres": "strategy",
     "age": "3+",
-    "image": "https://www.digiseller.ru/preview/205254/p1_2879775_99bb718f.jpg",
+    "image": "https://torrentis.net/uploads/posts/2019-12/1482394485_sims-3-vse-dopolneniya-1.jpg",
     "date": "2021-08-10",
+    "quantity": 1,
+    "count": 319,
     "rating": {
-      "rate": 4.8,
-      "count": 319
+      "rate": 4.8
     }
   },
   {
@@ -172,11 +182,12 @@
     "category": "playstation",
     "genres": "simulation",
     "age": "12+",
-    "image": "https://www.digiseller.ru/preview/205254/p1_2879775_99bb718f.jpg",
+    "image": "https://torrentis.net/uploads/posts/2019-12/1482394485_sims-3-vse-dopolneniya-1.jpg",
     "date": "2021-10-02",
+    "quantity": 1,
+    "count": 400,
     "rating": {
-      "rate": 4.8,
-      "count": 400
+      "rate": 4.8
     }
   },
   {
@@ -189,9 +200,10 @@
     "age": "12+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2019-03-02",
+    "quantity": 1,
+    "count": 250,
     "rating": {
-      "rate": 2.9,
-      "count": 250
+      "rate": 2.9
     }
   },
   {
@@ -204,9 +216,10 @@
     "age": "12+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2020-01-01",
+    "quantity": 1,
+    "count": 140,
     "rating": {
-      "rate": 2.2,
-      "count": 140
+      "rate": 2.2
     }
   },
   {
@@ -219,9 +232,10 @@
     "age": "3+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-05-02",
+    "quantity": 1,
+    "count": 235,
     "rating": {
-      "rate": 2.6,
-      "count": 235
+      "rate": 2.6
     }
   },
   {
@@ -234,9 +248,10 @@
     "age": "18+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-05-02",
+    "quantity": 1,
+    "count": 235,
     "rating": {
-      "rate": 2.6,
-      "count": 235
+      "rate": 2.6
     }
   },
   {
@@ -249,9 +264,10 @@
     "age": "6+",
     "image": "https://piterplay.com/image/catalog/kupit-far-cry-new-dawn-ps41.jpg",
     "date": "2021-05-02",
+    "quantity": 1,
+    "count": 235,
     "rating": {
-      "rate": 2.6,
-      "count": 235
+      "rate": 2.6
     }
   }
 ]

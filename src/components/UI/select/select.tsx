@@ -12,7 +12,7 @@ interface SelectType {
 const Select: React.FunctionComponent<SelectType> = function ({ obj }) {
   return (
     <select value={obj.select} onChange={obj.funcSelect} className={product.selected}>
-      <option defaultValue="" selected hidden>
+      <option defaultValue="" hidden>
         Choose
       </option>
       {obj.values.map((el, i) => (

@@ -17,7 +17,10 @@ import {
 import { AuthStateTypes } from "@/store/types";
 
 const initialState: AuthStateTypes = {
-  userData: {},
+  userData: {
+    name: "",
+    password: "",
+  },
   authorized: false,
   errorMessage: "",
   successMessage: "",
