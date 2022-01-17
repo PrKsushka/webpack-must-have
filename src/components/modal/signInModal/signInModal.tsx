@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
 import signin from "../../UI/input/input.module.scss";
@@ -9,6 +9,8 @@ import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+import { RootState } from "@/main";
+import { StoreState } from "@/store/types";
 
 
 const SignInModal: React.FunctionComponent = function () {
@@ -23,9 +25,9 @@ const SignInModal: React.FunctionComponent = function () {
     dispatch(signInAction(data));
     body.style.overflow="auto"
   };
-
+  const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (
-    <Modal>
+    <Modal isActive={isActive}>
       <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"

@@ -17,6 +17,8 @@ import {
   REGISTRATION_FAILED_ACTION,
   SET_MODAL_ACTIVE,
   SET_MODAL_IN_ACTIVE,
+  SHOW_ADD_NEW_PRODUCT_MODAL,
+  SHOW_EDIT_MODAL,
   SIGN_IN_CONFIRMED_ACTION,
   SIGN_IN_FAILED_ACTION,
   SIGN_IN_MODAL_ACTIVE,
@@ -166,5 +168,15 @@ export function changeDataAboutUserAction(formData: object) {
       .catch((err) => {
         dispatch(changeDataAboutUserFailedAction(err));
       });
+  };
+}
+export function showEditModal() {
+  return {
+    type: SHOW_EDIT_MODAL,
+  };
+}
+export function showAddNewProductModal() {
+  return {
+    type: SHOW_ADD_NEW_PRODUCT_MODAL,
   };
 }

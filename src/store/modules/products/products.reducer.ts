@@ -1,4 +1,5 @@
 import {
+  ADD_NEW_POSITION,
   ADD_TO_CART_ACTION,
   DATA_SORTED_BY_AGE_CONFIRMED_ACTION,
   DATA_SORTED_BY_AGE_FAILED_ACTION,
@@ -12,7 +13,10 @@ import {
   GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION,
   GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION,
   INCREASE_COUNT_ACTION,
+  LOG_OUT_FROM_CART_ACTION,
   REMOVE_FROM_CART_ACTION,
+  REMOVE_FROM_LIST_OF_PRODUCTS,
+  UPDATE_PRODUCT_ACTION,
 } from "@/store/modules/products/products.constants";
 import { ProductStateTypes } from "@/store/types";
 import { TopProduct } from "@/types/productsCommon.types";
@@ -33,7 +37,7 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
     case GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION:
       return {
         ...state,
-        allProducts: action.payload,
+        allProducts: [...action.payload],
         successMessage: "Good",
       };
     case GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION:
@@ -125,6 +129,12 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
         cart: [...removeProduct],
       };
     }
+    case REMOVE_FROM_LIST_OF_PRODUCTS: {
+      return {
+        ...state,
+        allProducts: [...action.payload],
+      };
+    }
     case INCREASE_COUNT_ACTION: {
       const increaseCount = state.cart.map((el) =>
         el.id === action.payload && el.quantity !== undefined
@@ -147,6 +157,23 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
         cart: [...decreaseCount],
       };
     }
+    case UPDATE_PRODUCT_ACTION: {
+      return {
+        ...state,
+        allProducts: [...action.payload],
+      };
+    }
+    case ADD_NEW_POSITION: {
+      return {
+        ...state,
+        allProducts: [...action.payload],
+      };
+    }
+    case LOG_OUT_FROM_CART_ACTION:
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }

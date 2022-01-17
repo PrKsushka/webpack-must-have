@@ -12,6 +12,8 @@ import {
   SIGN_IN_CONFIRMED_ACTION,
   SIGN_IN_FAILED_ACTION,
   SIGN_IN_PARAMS_ACTION,
+  SHOW_EDIT_MODAL,
+  SHOW_ADD_NEW_PRODUCT_MODAL,
 } from "@/store/modules/auth/auth.constants";
 
 import { AuthStateTypes } from "@/store/types";
@@ -28,6 +30,8 @@ const initialState: AuthStateTypes = {
   userSignIn: false,
   userRegister: false,
   signInMenu: false,
+  editModal: false,
+  addNewProductModal: false,
 };
 type AuthAction = {
   type: string;
@@ -113,6 +117,8 @@ const authReducer = (state = initialState, action: AuthAction = { type: "DEFAULT
         userRegister: false,
         userSignIn: false,
         signInMenu: false,
+        editModal: false,
+        addNewProductModal: false,
       };
     case SIGN_IN_MODAL_ACTIVE:
       return {
@@ -139,6 +145,18 @@ const authReducer = (state = initialState, action: AuthAction = { type: "DEFAULT
     case LOG_OUT_ACTION:
       return {
         ...initialState,
+      };
+    case SHOW_EDIT_MODAL:
+      return {
+        ...state,
+        editModal: true,
+        addNewProductModal: false,
+      };
+    case SHOW_ADD_NEW_PRODUCT_MODAL:
+      return {
+        ...state,
+        addNewProductModal: true,
+        editModal: false,
       };
     default:
       return state;

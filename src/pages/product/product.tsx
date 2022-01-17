@@ -11,6 +11,8 @@ import SearchInput from "@/components/searchInput/searchInput";
 import usePreloader from "@/hooks/preloaderHook/usePreloader";
 import SortAscDesc from "@/components/modules/product/sortAscDesc";
 import { StoreState } from "@/store/types";
+import { showAddNewProductModal } from "@/store/modules/auth/auth.actions";
+import AddNewProductModal from "@/components/modal/addNewProductModal/addNewProductModal";
 
 const Product: React.FunctionComponent = function () {
   const dispatch = useDispatch();
@@ -23,6 +25,12 @@ const Product: React.FunctionComponent = function () {
     hideloader();
   }, []);
   const products = useSelector<RootState, Array<object>>((state: StoreState) => state.products.allProducts);
+  const userName = useSelector((state: StoreState) => state.auth.userData.name);
+  const activeAddProdModal=useSelector((state: StoreState) => state.auth.addNewProductModal);
+  const addProduct = () => {
+    document.body.style.overflow = "auto";
+    dispatch(showAddNewProductModal());
+  };
   function getRegistrationTokenFromLocation(pathName: string) {
     return pathName.slice(10);
   }
@@ -64,6 +72,11 @@ const Product: React.FunctionComponent = function () {
       <div className={product.column}>
         <div className={product.searchInput}>
           <SearchInput />
+          {userName.toLowerCase() === "admin" ? (
+            <button className={product.addButton} type="button" onClick={addProduct}>
+              Add new position
+            </button>
+          ) : null}
         </div>
         <div className={product.productWrapper}>
           {loader}
@@ -72,6 +85,7 @@ const Product: React.FunctionComponent = function () {
             : products.map((elem: TopProduct) => <CardItem key={elem.id} item={elem} />)}
         </div>
       </div>
+      {(activeAddProdModal===true)? <AddNewProductModal /> : null}
     </div>
   );
 };

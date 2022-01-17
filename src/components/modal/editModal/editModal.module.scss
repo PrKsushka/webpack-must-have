@@ -1,0 +1,20 @@
+@import "src/styles/mixin";
+
+.title {
+  @include fonts("Roboto", 25px, $w);
+}
+
+.but {
+  pointer-events: all;
+  padding: 7px 50px;
+  border-radius: 13px;
+  background: $purple;
+  @include fonts("Roboto", 14px, $w);
+  cursor: pointer;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

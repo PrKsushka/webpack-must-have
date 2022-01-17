@@ -1,0 +1,5 @@
+@import "src/styles/mixin";
+
+.elements {
+  @include fonts("Roboto", 18px, $w);
+}

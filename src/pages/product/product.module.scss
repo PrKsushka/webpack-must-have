@@ -65,3 +65,13 @@
   @include fonts("Roboto", 18px, $w);
   border-bottom: 1px solid;
 }
+
+.addButton {
+  background: $button;
+  border-radius: 50px;
+  border: none;
+  padding: 16px 20px;
+  @include fonts("Roboto", 14px, $w);
+  cursor: pointer;
+  margin-left: 20px;
+}

@@ -1,6 +1,7 @@
 import { Action, Dispatch } from "redux";
 import { getProducts, getProductsByAge, getProductsByGenre, getProductsByType } from "@/api/dataAboutProducts";
 import {
+  ADD_NEW_POSITION,
   ADD_TO_CART_ACTION,
   DATA_SORTED_BY_AGE_CONFIRMED_ACTION,
   DATA_SORTED_BY_AGE_FAILED_ACTION,
@@ -14,9 +15,13 @@ import {
   GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION,
   GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION,
   INCREASE_COUNT_ACTION,
+  LOG_OUT_FROM_CART_ACTION,
   REMOVE_FROM_CART_ACTION,
+  REMOVE_FROM_LIST_OF_PRODUCTS,
   SORT_PRODUCTS_BY_CATEGORY,
+  UPDATE_PRODUCT_ACTION,
 } from "@/store/modules/products/products.constants";
+import { addNewProduct, deleteProduct, updatedProduct } from "@/api/adminChangeProductsQuery";
 
 export function getDataAboutProductsConfirmedAction(data: Array<object>) {
   return {
@@ -181,5 +186,74 @@ export function decreaseCountAction(id: number | undefined) {
   return {
     type: DECREASE_COUNT_ACTION,
     payload: id,
+  };
+}
+export function logOutFromCartAction() {
+  return {
+    type: LOG_OUT_FROM_CART_ACTION,
+  };
+}
+export function newListOfProducts(data: Array<object>) {
+  return {
+    type: REMOVE_FROM_LIST_OF_PRODUCTS,
+    payload: data,
+  };
+}
+export function removeFromListOfProducts(id: number) {
+  return (dispatch: Dispatch<Action>) => {
+    deleteProduct(id)
+      .then((res) => {
+        if (res.data) {
+          dispatch(newListOfProducts(res.data));
+        } else {
+          throw Error();
+        }
+      })
+      .catch((err) => {
+        dispatch(getDataAboutProductsFailedAction(err));
+      });
+  };
+}
+export function updateProductAction(data: Array<object>) {
+  return {
+    type: UPDATE_PRODUCT_ACTION,
+    payload: data,
+  };
+}
+export function updateProduct(formData: object, id: number | undefined) {
+  return (dispatch: Dispatch<Action>) => {
+    updatedProduct(formData, id)
+      .then((res) => {
+        if (res.data) {
+          dispatch(updateProductAction(res.data));
+        } else {
+          throw Error();
+        }
+      })
+      .catch((err) => {
+        dispatch(getDataAboutProductsFailedAction(err));
+      });
+  };
+}
+
+export function addNewPosition(data: Array<object>) {
+  return {
+    type: ADD_NEW_POSITION,
+    payload: data,
+  };
+}
+export function addNewPositionAction(formData: object) {
+  return (dispatch: Dispatch<Action>) => {
+    addNewProduct(formData)
+      .then((res) => {
+        if (res.data) {
+          dispatch(addNewPosition(res.data));
+        } else {
+          throw Error();
+        }
+      })
+      .catch((err) => {
+        dispatch(getDataAboutProductsFailedAction(err));
+      });
   };
 }

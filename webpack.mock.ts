@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpackMockServer from "webpack-mock-server";
-import data from "./data.json";
+import data from "./data1";
 import { TopProduct } from "@/types/productsCommon.types";
+import changeDate from "@/utils/date";
 
 export default webpackMockServer.add((app, helper) => {
-  const arrData = data;
   app.get("/testMock", (_req, res) => {
     const response = {
       id: helper.getUniqueIdInt(),
@@ -55,30 +55,30 @@ export default webpackMockServer.add((app, helper) => {
     });
   });
   app.get("/api/products", (_req, res) => {
-    arrData.sort((a, b) => a.id - b.id);
+    data.sort((a, b) => a.id - b.id);
     if (_req.query.sortPrice === "asc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
+      data.sort((a: TopProduct, b: TopProduct) => {
         const c = <number>a.price;
         const d = <number>b.price;
         return c - d;
       });
     }
     if (_req.query.sortPrice === "desc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
+      data.sort((a: TopProduct, b: TopProduct) => {
         const c = <number>b.price;
         const d = <number>a.price;
         return c - d;
       });
     }
     if (_req.query.sortRate === "asc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
+      data.sort((a: TopProduct, b: TopProduct) => {
         const c = <number>a.rating?.rate;
         const d = <number>b.rating?.rate;
         return c - d;
       });
     }
     if (_req.query.sortRate === "desc") {
-      arrData.sort((a: TopProduct, b: TopProduct) => {
+      data.sort((a: TopProduct, b: TopProduct) => {
         const c = <number>b.rating?.rate;
         const d = <number>a.rating?.rate;
         return c - d;
@@ -87,14 +87,14 @@ export default webpackMockServer.add((app, helper) => {
     let newSortArr;
 
     if (_req.query.genre) {
-      newSortArr = arrData.filter((elem) => _req.query.genre === elem.genres);
+      newSortArr = data.filter((elem) => _req.query.genre === elem.genres);
       if (_req.query.genre !== "all") {
         res.json(newSortArr);
       }
       return;
     }
     if (_req.query.userAge) {
-      newSortArr = arrData.filter(
+      newSortArr = data.filter(
         (elem) => elem.age.replace("+", " ") === decodeURIComponent(`${_req.query.userAge}`.replace(/"%2B"/g, ""))
       );
       if (_req.query.userAge !== "all") {
@@ -103,7 +103,7 @@ export default webpackMockServer.add((app, helper) => {
       return;
     }
 
-    res.json(arrData);
+    res.json(data);
   });
 
   app.get("/api/getTopProducts", (_req, res) => {
@@ -134,7 +134,36 @@ export default webpackMockServer.add((app, helper) => {
       description: req.body.description,
     });
   });
-
+  app.delete("/api/products/:id", (_req, res) => {
+    const itemIndex = data.findIndex((el) => String(el.id) === _req.params.id);
+    if (itemIndex >= 0) {
+      data.splice(itemIndex, 1);
+    }
+    return res.json(data);
+  });
+  app.put("/api/products", (_req, res) => {
+    const itemIndex = data.findIndex((el) => el.id === _req.body.id);
+    const newObj = {
+      ...data[itemIndex],
+      title: _req.body.formData.title,
+      category: _req.body.formData.category[0],
+      price: _req.body.formData.price,
+      age: _req.body.formData.age,
+      genres: _req.body.formData.genres,
+      image: _req.body.formData.image,
+      description: _req.body.formData.description,
+    };
+    if (itemIndex >= 0) {
+      data.splice(itemIndex, 1, newObj);
+    }
+    return res.json(data);
+  });
+  app.post("/api/products", (_req, res) => {
+    const dateNow = changeDate();
+    const newObj = { id: Math.floor(Math.random() * 100), date: dateNow, ..._req.body };
+    data.push(newObj);
+    res.json(data);
+  });
   app.get("/api/getProfile", (_req, res) => {
     res.json(data);
   });
