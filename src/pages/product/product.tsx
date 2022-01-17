@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/main";
 import { dataSortedByAge, dataSortedByGenre, getDataAboutProducts } from "@/store/modules/products/products.actions";
-import CardItem from "@/components/cardItem/cardItem";
 import { TopProduct } from "../../types/productsCommon.types";
 import product from "./product.module.scss";
 import InputRadioGroup from "@/components/UI/inputRadioGroup/inputRadioGroup";
 import SearchInput from "@/components/searchInput/searchInput";
-import usePreloader from "@/hooks/preloaderHook/usePreloader";
 import SortAscDesc from "@/components/modules/product/sortAscDesc";
 import { StoreState } from "@/store/types";
 import { showAddNewProductModal } from "@/store/modules/auth/auth.actions";
 import AddNewProductModal from "@/components/modal/addNewProductModal/addNewProductModal";
+import Preloader from "@/components/UI/preloader/preloader";
+import toggleBodyOverflow from "@/utils/overflow";
+
+
+const CardItem = React.lazy(() => import("@/components/cardItem/cardItem"));
 
 const Product: React.FunctionComponent = function () {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("Products");
-  const [loader, showLoader, hideloader] = usePreloader();
   const [selectedRadioButton, setSelectedRadioButton] = useState("all");
   useEffect(() => {
-    showLoader();
     dispatch(getDataAboutProducts());
-    hideloader();
   }, []);
   const products = useSelector<RootState, Array<object>>((state: StoreState) => state.products.allProducts);
   const userName = useSelector((state: StoreState) => state.auth.userData.name);
-  const activeAddProdModal=useSelector((state: StoreState) => state.auth.addNewProductModal);
+  const activeAddProdModal = useSelector((state: StoreState) => state.auth.addNewProductModal);
   const addProduct = () => {
-    document.body.style.overflow = "auto";
+    toggleBodyOverflow();
     dispatch(showAddNewProductModal());
   };
   function getRegistrationTokenFromLocation(pathName: string) {
     return pathName.slice(10);
   }
   const location = useLocation();
-  const categoryPath = getRegistrationTokenFromLocation(location.pathname);
+  const categoryPath = useMemo(() => getRegistrationTokenFromLocation(location.pathname), [location.pathname]);
   const filtered = () => products.filter((element: TopProduct) => element.category === categoryPath);
 
   const objectToSendForGenreButtons = {
@@ -78,14 +78,15 @@ const Product: React.FunctionComponent = function () {
             </button>
           ) : null}
         </div>
-        <div className={product.productWrapper}>
-          {loader}
-          {location.pathname !== "/products"
-            ? filtered().map((elem: TopProduct) => <CardItem key={elem.id} item={elem} />)
-            : products.map((elem: TopProduct) => <CardItem key={elem.id} item={elem} />)}
-        </div>
+        <Suspense fallback={<Preloader />}>
+          <div className={product.productWrapper}>
+            {location.pathname !== "/products"
+              ? filtered().map((elem: TopProduct) => <CardItem key={elem.id} item={elem} />)
+              : products.map((elem: TopProduct) => <CardItem key={elem.id} item={elem} />)}
+          </div>
+        </Suspense>
       </div>
-      {(activeAddProdModal===true)? <AddNewProductModal /> : null}
+      {activeAddProdModal === true ? <AddNewProductModal /> : null}
     </div>
   );
 };

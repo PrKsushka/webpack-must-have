@@ -11,7 +11,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+import toggleBodyOverflow from "@/utils/overflow";
 import { StoreState } from "@/store/types";
+
 
 const RegistrationModal: React.FunctionComponent = function () {
   const {
@@ -22,10 +24,9 @@ const RegistrationModal: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state: StoreState) => state.auth.authorized);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(registrationAction(data));
-    body.style.overflow="auto"
+    toggleBodyOverflow();
   };
   if (authorized) {
     history.push("/profile");

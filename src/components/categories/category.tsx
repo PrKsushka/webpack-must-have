@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { data, links } from "../../constants/constants";
+import { data, links } from "../../constants/routeMenuConstant";
 import category from "./category.module.scss";
 import { DropdownAndCategory } from "../../types/dropDownMenu.types";
 

@@ -15,6 +15,9 @@ import styles from "../editModal/editModal.module.scss";
 import { addNewPositionAction } from "../../../store/modules/products/products.actions";
 import { StoreState } from "@/store/types";
 import { RootState } from "@/main";
+import toggleBodyOverflow from "@/utils/overflow";
+import { ages, categories } from "@/constants/adminPageConstants";
+
 
 
 const AddNewProductModal: React.FunctionComponent = function () {
@@ -25,19 +28,16 @@ const AddNewProductModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(editAddNewProductModal) });
   const dispatch = useDispatch();
-  const { body } = document;
+
   const onSubmit = (data: dataForm) => {
-    console.log(data);
     if (data) {
       dispatch(addNewPositionAction(data));
-      body.style.overflow = "auto";
+      toggleBodyOverflow();
     }
     dispatch(setModalInActive());
     reset();
   };
   const isActiveAddNewProductModal = useSelector<RootState, boolean>((state: StoreState) => state.auth.addNewProductModal);
-  const ages = ["3+", "6+", "12+", "18+"];
-  const categories = ["pc", "xbox", "playstation"];
   return (
     <Modal isActive={isActiveAddNewProductModal}>
       <form className={signin.formData} onSubmit={handleSubmit(onSubmit)}>

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Home from "./pages/home/home";
 import Product from "./pages/product/product";
 import About from "./pages/about/about";
-import { links } from "./constants/constants";
+import { links } from "./constants/routeMenuConstant";
 import Layout from "./components/layout/layout";
 import ErrorBoundary from "./components/errorBoundary/errorBoundary";
 import Profile from "@/pages/profile/profile";

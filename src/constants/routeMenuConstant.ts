@@ -1,6 +1,5 @@
 import { DropdownAndCategory } from "../types/dropDownMenu.types";
 
-
 export const data: Array<DropdownAndCategory> = [
   {
     id: 1,

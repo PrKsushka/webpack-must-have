@@ -1,6 +1,8 @@
+import { FieldValues, UseFormRegister } from "react-hook-form";
+
 export interface InputCheckboxTypes {
   arr: Array<string>;
-  register: unknown;
+  register: UseFormRegister<FieldValues>;
   registerOption: object;
   name: string;
 }

@@ -1,6 +1,6 @@
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { links } from "@/constants/constants";
+import { links } from "@/constants/routeMenuConstant";
 import { RootState } from "@/main";
 import { StoreState } from "@/store/types";
 

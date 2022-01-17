@@ -91,6 +91,9 @@ export default webpackMockServer.add((app, helper) => {
       if (_req.query.genre !== "all") {
         res.json(newSortArr);
       }
+      if (_req.query.genre === "all") {
+        res.json(data);
+      }
       return;
     }
     if (_req.query.userAge) {
@@ -99,6 +102,9 @@ export default webpackMockServer.add((app, helper) => {
       );
       if (_req.query.userAge !== "all") {
         res.json(newSortArr);
+      }
+      if (_req.query.userAge === "all") {
+        res.json(data);
       }
       return;
     }

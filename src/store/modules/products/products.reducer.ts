@@ -28,16 +28,16 @@ const initialState: ProductStateTypes = {
   successMessage: "",
   cart: [],
 };
-type ProductAcion = {
+type ProductAction = {
   type: string;
-  payload?: Array<object> | object | unknown;
+  payload?: Array<object> | object | number;
 };
-const productReducer = (state = initialState, action: ProductAcion = { type: "DEFAULT" }) => {
+const productReducer = (state = initialState, action: ProductAction = { type: "DEFAULT" }) => {
   switch (action.type) {
     case GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION:
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
         successMessage: "Good",
       };
     case GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION:
@@ -132,7 +132,7 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
     case REMOVE_FROM_LIST_OF_PRODUCTS: {
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
       };
     }
     case INCREASE_COUNT_ACTION: {
@@ -160,13 +160,13 @@ const productReducer = (state = initialState, action: ProductAcion = { type: "DE
     case UPDATE_PRODUCT_ACTION: {
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
       };
     }
     case ADD_NEW_POSITION: {
       return {
         ...state,
-        allProducts: [...action.payload],
+        allProducts: action.payload,
       };
     }
     case LOG_OUT_FROM_CART_ACTION:

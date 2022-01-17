@@ -11,6 +11,7 @@ import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import { RootState } from "@/main";
 import { StoreState } from "@/store/types";
+import toggleBodyOverflow from "@/utils/overflow";
 
 
 const SignInModal: React.FunctionComponent = function () {
@@ -20,10 +21,9 @@ const SignInModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
-  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(signInAction(data));
-    body.style.overflow="auto"
+    toggleBodyOverflow();
   };
   const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (

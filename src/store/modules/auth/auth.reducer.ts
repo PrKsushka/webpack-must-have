@@ -35,7 +35,7 @@ const initialState: AuthStateTypes = {
 };
 type AuthAction = {
   type: string;
-  payload?: Array<object> | object | unknown;
+  payload?: Array<object> | object;
 };
 const authReducer = (state = initialState, action: AuthAction = { type: "DEFAULT" }) => {
   switch (action.type) {

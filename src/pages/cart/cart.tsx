@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSelector } from "react-redux";
 import styles from "./cart.module.scss";
 import SuccessShoppingModal from "@/components/modal/successShoppingModal/successShoppingModal";
 import { productsInShoppingCart } from "@/store/modules/products/product.selectors";
 import { StoreState } from "@/store/types";
-import CartProductsListTable from "@/components/modules/cart/tables/cartProductsListTable/cartProductsListTable";
+import Preloader from "@/components/UI/preloader/preloader";
 
+const CartProductsListTable = React.lazy(
+  () => import("@/components/modules/cart/tables/cartProductsListTable/cartProductsListTable")
+);
 
 const Cart: React.FunctionComponent = function () {
   const [activeSuccessShoppingModal, setActiveSuccessShoppingModal] = useState(false);
@@ -14,7 +17,9 @@ const Cart: React.FunctionComponent = function () {
     return (
       <div>
         <div className={styles.title}>Cart page</div>
-        <CartProductsListTable funcActiveSuccessShoppingModal={setActiveSuccessShoppingModal} />
+        <Suspense fallback={<Preloader />}>
+          <CartProductsListTable funcActiveSuccessShoppingModal={setActiveSuccessShoppingModal} />
+        </Suspense>
         {activeSuccessShoppingModal && <SuccessShoppingModal />}
       </div>
     );

@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import modal from "./modal.module.scss";
 import { setModalInActive } from "@/store/modules/auth/auth.actions";
 import { Dispatcher } from "@/types/types";
+import toggleBodyOverflow from "@/utils/overflow";
+
 
 interface Modal {
   isActive: boolean;
@@ -13,14 +15,15 @@ interface Modal {
 
 const Modal: React.FunctionComponent<Modal> = function ({ isActive, el, children }) {
   const dispatch = useDispatch();
-  const { body } = document;
   const closeModal = () => {
     dispatch(setModalInActive());
-    body.style.overflow = "auto";
-    (el)? el(false) : null;
+    toggleBodyOverflow();
+    if(el) {el(false)}
   };
   useEffect(() => {
-    (isActive) ? body.style.overflow = "hidden":body.style.overflow = "auto";
+    if(isActive){
+      toggleBodyOverflow(false);
+    }
   }, [isActive]);
   return ReactDom.createPortal(
     <div className={isActive ? modal.active : modal.modal}>

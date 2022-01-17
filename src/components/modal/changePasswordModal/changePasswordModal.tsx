@@ -11,6 +11,8 @@ import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
 import { RootState } from "@/main";
 import { StoreState } from "@/store/types";
+import toggleBodyOverflow from "@/utils/overflow";
+
 
 const ChangePasswordModal: React.FunctionComponent = function () {
   const {
@@ -20,11 +22,11 @@ const ChangePasswordModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(loginRegisterSchema) });
   const dispatch = useDispatch();
-  const { body } = document;
+
   const onSubmit = (data: dataForm) => {
     if (data) {
       dispatch(changePasswordAction(data));
-      body.style.overflow="auto"
+      toggleBodyOverflow();
     }
     reset();
   };
