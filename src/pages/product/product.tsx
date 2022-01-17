@@ -6,7 +6,7 @@ import { dataSortedByAge, dataSortedByGenre, getDataAboutProducts } from "@/stor
 import CardItem from "@/components/cardItem/cardItem";
 import { TopProduct } from "../../types/productsCommon.types";
 import product from "./product.module.scss";
-import InputRadio from "@/components/UI/inputRadioGroup/inputRadioGroup";
+import InputRadioGroup from "@/components/UI/inputRadioGroup/inputRadioGroup";
 import SearchInput from "@/components/searchInput/searchInput";
 import usePreloader from "@/hooks/preloaderHook/usePreloader";
 import SortAscDesc from "@/components/modules/product/sortAscDesc";
@@ -61,11 +61,11 @@ const Product: React.FunctionComponent = function () {
         <div>
           <div className={product.radioButtonWrapper}>
             <h3 className={product.title}>Genres</h3>
-            <InputRadio obj={objectToSendForGenreButtons} />
+            <InputRadioGroup obj={objectToSendForGenreButtons} />
           </div>
           <div className={product.radioButtonWrapper}>
             <h3 className={product.title}>Age</h3>
-            <InputRadio obj={objectToSendForAgeButtons} />
+            <InputRadioGroup obj={objectToSendForAgeButtons} />
           </div>
         </div>
       </div>
