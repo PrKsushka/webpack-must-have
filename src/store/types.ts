@@ -27,6 +27,8 @@ export interface AuthStateTypes {
   userSignIn: boolean;
   userRegister: boolean;
   signInMenu: boolean;
+  editModal: boolean;
+  addNewProductModal: boolean;
 }
 export interface ProductStateTypes {
   allProducts: Array<ProductReducer>;

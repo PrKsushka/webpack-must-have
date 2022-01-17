@@ -12,7 +12,7 @@ type ObjectToSend = {
 interface InputRadioGroup {
   obj: ObjectToSend;
 }
-const inputRadio: React.FunctionComponent<InputRadioGroup> = ({ obj }) => {
+const InputRadioGroup: React.FunctionComponent<InputRadioGroup> = ({ obj }) => {
   const dispatch = useDispatch();
   const isRadioSelected = (value: string): boolean => obj.selected === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,4 +36,4 @@ const inputRadio: React.FunctionComponent<InputRadioGroup> = ({ obj }) => {
     </div>
   );
 };
-export default inputRadio;
+export default InputRadioGroup;

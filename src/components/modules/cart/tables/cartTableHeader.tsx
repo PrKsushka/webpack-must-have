@@ -3,7 +3,7 @@ import React from "react";
 interface Titles {
   titles: Array<string>;
 }
-const Thead: React.FunctionComponent<Titles> = function ({ titles }) {
+const CartTableHeader: React.FunctionComponent<Titles> = function ({ titles }) {
   return (
     <thead>
       <tr>
@@ -14,4 +14,4 @@ const Thead: React.FunctionComponent<Titles> = function ({ titles }) {
     </thead>
   );
 };
-export default Thead;
+export default CartTableHeader;

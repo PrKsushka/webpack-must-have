@@ -11,6 +11,7 @@ import { RootState } from "@/main";
 import cart from "../../assets/images/cart.png";
 import { countOfProductsInShoppingCart } from "@/store/modules/products/product.selectors";
 import { StoreState } from "@/store/types";
+import { logOutFromCartAction } from "@/store/modules/products/products.actions";
 
 const Header: React.FunctionComponent = function () {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Header: React.FunctionComponent = function () {
   const history = useHistory();
   const logOut = () => {
     dispatch(logOutAction());
+    dispatch(logOutFromCartAction());
     history.push("/");
     window.history.replaceState({}, document.title);
   };

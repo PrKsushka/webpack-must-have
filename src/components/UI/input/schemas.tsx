@@ -21,3 +21,12 @@ export const loginRegisterSchema = yup.object().shape({
     .matches(/^\d+(?:\.\d+)?$/, "Age should include only numbers"),
   description: yup.string().matches(/^.{5,500}$/, "Your description  should include from 5 to 500 symbols"),
 });
+
+export const editAddNewProductModal=yup.object().shape({
+  title: yup.string().matches(/^.{5,20}$/, "Title  should include from 5 to 20 symbols"),
+  genres: yup.string().matches(/^.{4,10}$/, "Genres  should include from 4 to 10 symbols"),
+  price: yup.number().min(1, "Price should include at least one symbol"),
+  image: yup.string().matches(/^.{5,100}$/, "Path for image  should include from 5 to 20 symbols"),
+  description: yup.string().matches(/^.{5,500}$/, "Your description  should include from 5 to 500 symbols"),
+})
+

@@ -4,7 +4,7 @@ interface TfooterTypes {
   res: number | string;
   showShoppingModal: any;
 }
-const Tfooter: React.FunctionComponent<TfooterTypes> = function ({ res, showShoppingModal }) {
+const CartTableFooter: React.FunctionComponent<TfooterTypes> = function ({ res, showShoppingModal }) {
   return (
     <tfoot>
       <tr>
@@ -19,4 +19,4 @@ const Tfooter: React.FunctionComponent<TfooterTypes> = function ({ res, showShop
     </tfoot>
   );
 };
-export default Tfooter;
+export default CartTableFooter;

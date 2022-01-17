@@ -32,8 +32,9 @@ const RegistrationModal: React.FunctionComponent = function () {
   } else {
     history.push("/");
   }
+  const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (
-    <Modal>
+    <Modal isActive={isActive}>
       <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"

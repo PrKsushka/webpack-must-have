@@ -14,7 +14,7 @@ type DeleteProductFunc = {
   id?: number;
   e: React.ChangeEvent<HTMLInputElement>;
 };
-const Tbody: React.FunctionComponent = function () {
+const CartTableMain: React.FunctionComponent = function () {
   const cart = useSelector<RootState, Array<object>>((state: StoreState) => state.products.cart);
   const [checkedForDelete, setCheckedForDelete] = useState(true);
 
@@ -73,4 +73,4 @@ const Tbody: React.FunctionComponent = function () {
     </tbody>
   );
 };
-export default Tbody;
+export default CartTableMain;
