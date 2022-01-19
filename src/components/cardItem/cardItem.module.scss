@@ -54,14 +54,6 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 20px 0 11px;
-
-        .title {
-          @include fonts("Roboto", 14px, $w);
-        }
-
-        .price {
-          @include fonts("Roboto", 16px, $w);
-        }
       }
     }
 
@@ -89,4 +81,12 @@
       }
     }
   }
+}
+
+.title {
+  @include fonts("Roboto", 14px, $w);
+}
+
+.smallText {
+  @include fonts("Roboto", 16px, $w);
 }

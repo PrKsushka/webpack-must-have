@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { editAddNewProductModal } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
-import signin from "@/components/UI/input/input.module.scss";
+import signin from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
@@ -73,7 +73,7 @@ const AddNewProductModal: React.FunctionComponent = function () {
         <br />
         <Input
           name="image"
-          text="Image"
+          text="Image (url)"
           registerOptions={{
             required: true,
           }}

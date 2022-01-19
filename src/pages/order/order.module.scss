@@ -1,0 +1,17 @@
+@import "src/styles/mixin";
+
+.mainOrder {
+  @include builder(flex, center, 100%);
+  flex-wrap: wrap;
+  padding: 50px;
+  box-sizing: border-box;
+
+  .titleOrder {
+    @include builder(flex, flex-start, 100%);
+    @include fonts("Roboto", 20px, $w);
+  }
+
+  .resultOrder {
+    @include builder(flex, flex-start, 100%);
+  }
+}

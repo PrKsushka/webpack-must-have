@@ -14,4 +14,5 @@ body {
 div,
 p {
   color: $w;
+  @include fonts("Roboto", 18px, $w);
 }

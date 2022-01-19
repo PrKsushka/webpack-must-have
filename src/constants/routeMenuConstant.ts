@@ -20,6 +20,7 @@ export const links = {
   about: "/about",
   profile: "/profile",
   cart: "/cart",
+  order: "/order",
 };
 const menuData = {
   home: {
@@ -53,6 +54,11 @@ const menuData = {
     id: 4,
     label: "About",
     path: "/about",
+  },
+  order: {
+    id: 5,
+    label: "Order",
+    path: "/order",
   },
 };
 

@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
 import MoonLoader from "react-spinners/MoonLoader";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./searchInput.module.scss";
 import useDebounce from "../../hooks/debounceHook/debounceHook";
 import { Product, TopProduct } from "@/types/productsCommon.types";
+import { addToCartAction } from "@/store/modules/products/products.actions";
+import { StoreState } from "@/store/types";
+import { signInParamsAction } from "@/store/modules/auth/auth.actions";
 
 const SearchInput: React.FunctionComponent = function () {
   const [input, setInput] = useState<string>("");
   const [postFound, setPostFound] = useState<Array<Product>>([]);
   const [isExpanded, setExpanded] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const auth = useSelector((state: StoreState) => state.auth.authorized);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInput(e.target.value);
+    if (auth) {
+      setInput(e.target.value);
+    } else {
+      dispatch(signInParamsAction());
+    }
   }
   const expandedContainer = () => {
     setExpanded(true);
   };
-  const postAlert = () => {
-    alert("add");
+  const postAlert = (id: number | undefined) => {
+    dispatch(addToCartAction(id));
   };
   const prepareUrl = (query: string) => {
     const url = `/api/search/${query}`;
@@ -57,8 +67,8 @@ const SearchInput: React.FunctionComponent = function () {
       {isLoading && <MoonLoader loading color="#000" size={20} />}
       {isExpanded && input !== ""
         ? postFound.map((val: TopProduct) => (
-            <div key={val.id} onClick={postAlert} className={s.foundElements}>
-              <img src={val.image} alt="found Picture"/>
+            <div key={val.id} onClick={() => postAlert(val.id)} className={s.foundElements}>
+              <img src={val.image} alt="found Picture" />
               <p>{val.title}</p>
               <p>{val.price}$</p>
             </div>

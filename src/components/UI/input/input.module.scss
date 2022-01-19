@@ -1,42 +1,37 @@
-@import "../../../styles/mixin";
+@import "src/styles/mixin";
 
-.formData {
+.wrapper {
+  .title {
+    @include fonts("Roboto", 20px, $w);
+  }
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   flex-direction: column;
 
-  .wrapper {
-    .title {
-      @include fonts("Roboto", 24px, $w);
-    }
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: column;
-
-    .invalid {
-      pointer-events: all;
-      @include fonts("Roboto", 16px, red);
-    }
-
-    input {
-      pointer-events: all;
-      padding: 4px 80px;
-    }
-  }
-
-  .changePassword {
-    @include fonts("Roboto", 24px, #eb26eb);
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .but {
+  .invalid {
     pointer-events: all;
-    padding: 7px 50px;
-    border-radius: 13px;
-    background: $purple;
-    @include fonts("Roboto", 14px, $w);
-    cursor: pointer;
+    @include fonts("Roboto", 16px, red);
   }
+
+  input {
+    pointer-events: all;
+    padding: 4px 80px;
+  }
+}
+
+.changePassword {
+  @include fonts("Roboto", 24px, #eb26eb);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.but {
+  pointer-events: all;
+  padding: 7px 50px;
+  border-radius: 13px;
+  background: $purple;
+  @include fonts("Roboto", 14px, $w);
+  cursor: pointer;
 }

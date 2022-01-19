@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
 import { changeDataAboutUserAction } from "@/store/modules/auth/auth.actions";
@@ -9,6 +9,7 @@ import signin from "@/components/UI/input/input.module.scss";
 import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import info from "./infoAboutUser.module.scss";
+import { StoreState } from "@/store/types";
 
 const InfoAboutUser: React.FunctionComponent = function () {
   const {
@@ -28,6 +29,7 @@ const InfoAboutUser: React.FunctionComponent = function () {
   };
   const changedInfo = [info.commonInfo, info.changedInfo].join(" ");
   const notChangedInfo = [info.commonInfo, info.notChangedInfo].join(" ");
+  const name=useSelector((state: StoreState)=>state.auth.userData.name);
   return (
     <form className={signin.formData} onSubmit={handleSubmit(onSubmit)} id="formElem">
       {submitForm ? (
@@ -41,6 +43,7 @@ const InfoAboutUser: React.FunctionComponent = function () {
           required: true,
         }}
         register={register}
+        value={name}
       />
       {errors.name ? <ErrorMessage>{errors.name.message}</ErrorMessage> : null}
       <br />

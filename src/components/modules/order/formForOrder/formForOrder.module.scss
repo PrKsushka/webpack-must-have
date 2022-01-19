@@ -1,0 +1,22 @@
+@import "../../../../styles/mixin";
+
+.formData {
+  display: flex;
+  flex-direction: column;
+  background: $darkPurple;
+  padding: 100px;
+  border-radius: 20px;
+
+  .title {
+    @include fonts("Roboto", 16px, $w);
+  }
+}
+
+.but {
+  pointer-events: all;
+  padding: 7px 50px;
+  border-radius: 13px;
+  background: $purple;
+  @include fonts("Roboto", 14px, $w);
+  cursor: pointer;
+}

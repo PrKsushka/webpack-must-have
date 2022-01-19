@@ -18,28 +18,32 @@ import {
   REMOVE_FROM_LIST_OF_PRODUCTS,
   UPDATE_PRODUCT_ACTION,
 } from "@/store/modules/products/products.constants";
-import { ProductStateTypes } from "@/store/types";
+import { ProductReducer, ProductStateTypes } from "@/store/types";
 import { TopProduct } from "@/types/productsCommon.types";
 
 const initialState: ProductStateTypes = {
   allProducts: [],
-  sortByCategory: [],
+  newProducts: [],
   errorMessage: "",
   successMessage: "",
   cart: [],
 };
 type ProductAction = {
   type: string;
-  payload?: Array<object> | object | number;
+  payload?: Array<ProductReducer> | number;
 };
 const productReducer = (state = initialState, action: ProductAction = { type: "DEFAULT" }) => {
   switch (action.type) {
-    case GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION:
+    case GET_DATA_ABOUT_PRODUCTS_CONFIRMED_ACTION: {
+      const products = action.payload as Array<ProductReducer>;
+      const freshProducts = products.slice(0, 3);
       return {
         ...state,
-        allProducts: action.payload,
+        allProducts: [...products],
+        newProducts: [...freshProducts],
         successMessage: "Good",
       };
+    }
     case GET_DATA_ABOUT_PRODUCTS_FAILED_ACTION:
       return {
         ...state,

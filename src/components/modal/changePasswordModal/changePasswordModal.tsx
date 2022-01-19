@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
 import { changePasswordAction } from "@/store/modules/auth/auth.actions";
-import signin from "@/components/UI/input/input.module.scss";
+import styles from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
@@ -33,8 +33,8 @@ const ChangePasswordModal: React.FunctionComponent = function () {
   const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (
     <Modal isActive={isActive}>
-      <form className={signin.formData} onSubmit={handleSubmit(onSubmit)}>
-        <h3 className={signin.changePassword}>Change Password</h3>
+      <form className={styles.formData} onSubmit={handleSubmit(onSubmit)}>
+        <h3 className={styles.changePassword}>Change Password</h3>
         <Input
           name="password"
           type="password"
@@ -57,7 +57,7 @@ const ChangePasswordModal: React.FunctionComponent = function () {
         />
         {errors.passwordDuplicate ? <ErrorMessage>{errors.passwordDuplicate.message}</ErrorMessage> : null}
         <br />
-        <button type="submit" className={signin.but}>
+        <button type="submit" className={styles.but}>
           Submit
         </button>
       </form>

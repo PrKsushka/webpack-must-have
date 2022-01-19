@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import home from "./home.module.scss";
 import SearchInput from "@/components/searchInput/searchInput";
 import CardItem from "@/components/cardItem/cardItem";
@@ -11,10 +10,11 @@ import SignInModal from "../../components/modal/signInModal/signInModal";
 import { RootState } from "@/main";
 import { StoreState } from "@/store/types";
 import { TopProduct } from "@/types/productsCommon.types";
+import { getDataAboutProducts } from "@/store/modules/products/products.actions";
 
 const Home: React.FunctionComponent = function () {
-  const [topProducts, setTopProducts] = useState<Array<TopProduct>>([]);
   const location = useLocation();
+  const dispatch=useDispatch();
   const locationState = location.state as ShowModalLocation;
   const authorized = useSelector<RootState, boolean>((state: StoreState) => state.auth.authorized);
   const queryParams = new URLSearchParams(location.search);
@@ -28,12 +28,12 @@ const Home: React.FunctionComponent = function () {
       });
     }
   }
-  const signInMenu = useSelector<RootState, boolean>((state: StoreState) => state.auth.signInMenu);
+
   useEffect(() => {
-    axios.get("api/getTopProducts").then((res) => {
-      setTopProducts((prevState) => [...prevState, ...res.data.slice(0, 3)]);
-    });
+    dispatch(getDataAboutProducts());
   }, []);
+  const signInMenu = useSelector<RootState, boolean>((state: StoreState) => state.auth.signInMenu);
+  const topProducts=useSelector((state: StoreState)=> state.products.newProducts)
 
   return (
     <div className={home.homeWrapper}>
@@ -50,7 +50,7 @@ const Home: React.FunctionComponent = function () {
           <CardItem key={elem.id} item={elem} />
         ))}
       </div>
-      {signIn && signInMenu ? <SignInModal /> : null}
+      {signIn || signInMenu ? <SignInModal /> : null}
     </div>
   );
 };

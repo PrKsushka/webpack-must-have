@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, useMemo } from "react";
+import React, { useState, Suspense, useMemo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/main";
@@ -14,19 +14,20 @@ import AddNewProductModal from "@/components/modal/addNewProductModal/addNewProd
 import Preloader from "@/components/UI/preloader/preloader";
 import toggleBodyOverflow from "@/utils/overflow";
 
-
 const CardItem = React.lazy(() => import("@/components/cardItem/cardItem"));
 
 const Product: React.FunctionComponent = function () {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("Products");
   const [selectedRadioButton, setSelectedRadioButton] = useState("all");
-  useEffect(() => {
-    dispatch(getDataAboutProducts());
-  }, []);
+
   const products = useSelector<RootState, Array<object>>((state: StoreState) => state.products.allProducts);
   const userName = useSelector((state: StoreState) => state.auth.userData.name);
   const activeAddProdModal = useSelector((state: StoreState) => state.auth.addNewProductModal);
+
+  useEffect(() => {
+    dispatch(getDataAboutProducts());
+  }, []);
   const addProduct = () => {
     toggleBodyOverflow();
     dispatch(showAddNewProductModal());

@@ -9,6 +9,7 @@ export interface InputTypes {
   errors?:any;
   registerOptions: object;
   value?: string;
+  code?: number;
 }
 interface HandleChangeTarget extends EventTarget {
   target: void;

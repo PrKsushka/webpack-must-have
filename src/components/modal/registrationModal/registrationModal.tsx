@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../UI/input/input.module.scss";
+import styles from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import { registrationAction } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
@@ -36,7 +36,7 @@ const RegistrationModal: React.FunctionComponent = function () {
   const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (
     <Modal isActive={isActive}>
-      <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
+      <form className={styles.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"
           text="Log in"
@@ -69,7 +69,7 @@ const RegistrationModal: React.FunctionComponent = function () {
         />
         {errors.passwordDuplicate ? <ErrorMessage>{errors.passwordDuplicate.message}</ErrorMessage> : null}
         <br />
-        <button type="submit" className={signin.but}>
+        <button type="submit" className={styles.but}>
           Submit
         </button>
       </form>
