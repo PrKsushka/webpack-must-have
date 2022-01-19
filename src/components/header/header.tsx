@@ -2,11 +2,15 @@ import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import header from "./header.module.scss";
-import { links, headerData } from "../../constants/constants";
+import { links, headerData } from "../../constants/routeMenuConstant";
 import SignInModal from "@/components/modal/signInModal/signInModal";
 import RegistrationModal from "@/components/modal/registrationModal/registrationModal";
 import HeaderNav from "@/components/header/components/headerNav";
-import { logOutAction, registerClickAction, signInModalActive } from "@/store/modules/auth/auth.actions";
+import {
+  logOutAction,
+  registerClickAction,
+  signInParamsAction
+} from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
 import cart from "../../assets/images/cart.png";
 import { countOfProductsInShoppingCart } from "@/store/modules/products/product.selectors";
@@ -22,7 +26,7 @@ const Header: React.FunctionComponent = function () {
   const count = useSelector<RootState, number>((state: StoreState) => countOfProductsInShoppingCart(state));
 
   const signIn = () => {
-    dispatch(signInModalActive());
+    dispatch(signInParamsAction());
   };
 
   const register = () => {

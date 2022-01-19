@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import Home from "./pages/home/home";
 import Product from "./pages/product/product";
 import About from "./pages/about/about";
-import { links } from "./constants/constants";
+import { links } from "./constants/routeMenuConstant";
 import Layout from "./components/layout/layout";
 import ErrorBoundary from "./components/errorBoundary/errorBoundary";
 import Profile from "@/pages/profile/profile";
 import PrivateRoute from "./components/privateRoute/privateRoute";
 import Cart from "@/pages/cart/cart";
+import Order from "@/pages/order/order";
 
 const App: React.FunctionComponent = function () {
   useEffect(() => {
@@ -26,6 +27,7 @@ const App: React.FunctionComponent = function () {
             <PrivateRoute path={`${links.products}/:platform`} component={Product} />
             <PrivateRoute path={links.about} component={About} />
             <PrivateRoute path={links.cart} component={Cart} />
+            <PrivateRoute path={links.order} component={Order} />
           </ErrorBoundary>
         </Switch>
       </Layout>

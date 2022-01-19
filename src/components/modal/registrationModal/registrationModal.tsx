@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Modal from "@/components/modal/modal";
-import signin from "../../UI/input/input.module.scss";
+import styles from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import { registrationAction } from "@/store/modules/auth/auth.actions";
 import { RootState } from "@/main";
@@ -11,7 +11,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginRegisterSchema } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
+import toggleBodyOverflow from "@/utils/overflow";
 import { StoreState } from "@/store/types";
+
 
 const RegistrationModal: React.FunctionComponent = function () {
   const {
@@ -22,10 +24,9 @@ const RegistrationModal: React.FunctionComponent = function () {
   const authorized = useSelector<RootState, boolean>((state: StoreState) => state.auth.authorized);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { body } = document;
   const submitForm = (data: dataForm) => {
     dispatch(registrationAction(data));
-    body.style.overflow="auto"
+    toggleBodyOverflow();
   };
   if (authorized) {
     history.push("/profile");
@@ -35,7 +36,7 @@ const RegistrationModal: React.FunctionComponent = function () {
   const isActive = useSelector<RootState, boolean>((state: StoreState) => state.auth.modalActive);
   return (
     <Modal isActive={isActive}>
-      <form className={signin.formData} onSubmit={handleSubmit(submitForm)}>
+      <form className={styles.formData} onSubmit={handleSubmit(submitForm)}>
         <Input
           name="name"
           text="Log in"
@@ -68,7 +69,7 @@ const RegistrationModal: React.FunctionComponent = function () {
         />
         {errors.passwordDuplicate ? <ErrorMessage>{errors.passwordDuplicate.message}</ErrorMessage> : null}
         <br />
-        <button type="submit" className={signin.but}>
+        <button type="submit" className={styles.but}>
           Submit
         </button>
       </form>

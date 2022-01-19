@@ -6,18 +6,24 @@ import StarRating from "@/components/starRating/starRating";
 import { addToCartAction } from "@/store/modules/products/products.actions";
 import { StoreState } from "@/store/types";
 import EditModal from "@/components/modal/editModal/editModal";
-import { showEditModal } from "@/store/modules/auth/auth.actions";
+import { showEditModal, signInParamsAction } from "@/store/modules/auth/auth.actions";
 
 const CardItem: React.FunctionComponent<CardProps> = function ({ item }) {
   const dispatch = useDispatch();
+  const auth = useSelector((state: StoreState) => state.auth.authorized);
   const addToCart = () => {
-    (item.id !== undefined) ? dispatch(addToCartAction(item.id)) : null;
+    if (item.id !== undefined && auth) {
+      dispatch(addToCartAction(item.id));
+    }
+    if (!auth) {
+      dispatch(signInParamsAction());
+    }
   };
-  const [openModal, setModalOpen]=useState(false);
+  const [openModal, setModalOpen] = useState(false);
   const activeEditModal = useSelector((state: StoreState) => state.auth.editModal);
   const edit = () => {
     dispatch(showEditModal());
-    setModalOpen((prevState => !prevState))
+    setModalOpen((prevState) => !prevState);
   };
   const userName = useSelector((state: StoreState) => state.auth.userData.name);
 
@@ -28,13 +34,15 @@ const CardItem: React.FunctionComponent<CardProps> = function ({ item }) {
           <div className={card.cardPicture} style={{ backgroundImage: `url(${item.image})` }} />
           <div className={card.infoWrapper}>
             <p className={card.title}>{item.title}</p>
-            <p className={card.price}>{item.price}$</p>
+            <p className={card.smallText}>{item.price}$</p>
             <StarRating rating={item.rating?.rate} />
           </div>
         </div>
 
         <div className={card.backSide}>
-          <p>{item.description}</p>
+          <p className={card.title}>{item.description}</p>
+          <p className={card.smallText}>{item.category}</p>
+          <p className={card.smallText}>{item.age}</p>
           <button className={card.addToCart} onClick={addToCart}>
             Add to cart
           </button>
@@ -45,7 +53,7 @@ const CardItem: React.FunctionComponent<CardProps> = function ({ item }) {
           ) : null}
         </div>
       </div>
-      {(activeEditModal && openModal) ? <EditModal obj={item} openModal={setModalOpen}/> : null}
+      {activeEditModal && openModal ? <EditModal obj={item} openModal={setModalOpen} /> : null}
     </div>
   );
 };

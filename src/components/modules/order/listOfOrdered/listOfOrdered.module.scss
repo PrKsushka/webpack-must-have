@@ -1,0 +1,17 @@
+@import "../../../../styles/mixin";
+
+.cardWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+
+  .orderCard {
+    @include builder(flex, space-around, 100%);
+
+    p {
+      @include builder(flex, space-around, 100%);
+      @include fonts("Roboto", 18px, $w);
+    }
+  }
+}

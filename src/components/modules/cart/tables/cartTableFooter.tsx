@@ -1,17 +1,23 @@
 import React from "react";
-import styles from "@/pages/cart/cart.module.scss";
+import { useHistory } from "react-router-dom";
+import styles from "./cartProductsListTable/cartProductListTable.module.scss";
+import { links } from "@/constants/routeMenuConstant";
+
 interface TfooterTypes {
   res: number | string;
-  showShoppingModal: any;
 }
-const CartTableFooter: React.FunctionComponent<TfooterTypes> = function ({ res, showShoppingModal }) {
+const CartTableFooter: React.FunctionComponent<TfooterTypes> = function ({ res }) {
+  const history = useHistory();
+  const goToOrderPage = () => {
+    history.push(links.order);
+  };
   return (
     <tfoot>
       <tr>
-        <td>You need to pay: {res}</td>
+        <td>You need to pay: {res}$</td>
         <td colSpan={4} />
         <td>
-          <button type="button" onClick={showShoppingModal} className={styles.changeCount}>
+          <button type="button" className={styles.buy} onClick={goToOrderPage}>
             Buy
           </button>
         </td>

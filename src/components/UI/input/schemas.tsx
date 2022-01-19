@@ -19,7 +19,9 @@ export const loginRegisterSchema = yup.object().shape({
     .string()
     .max(3, "Age should be from 0-100")
     .matches(/^\d+(?:\.\d+)?$/, "Age should include only numbers"),
-  description: yup.string().matches(/^.{5,500}$/, "Your description  should include from 5 to 500 symbols"),
+  description: yup.string().matches(/^.{5,500}$/, "It should include from 5 to 500 symbols"),
+  code: yup.number()
+    .min(4, "Code should include al least 4 numbers")
 });
 
 export const editAddNewProductModal=yup.object().shape({

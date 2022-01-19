@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChangePasswordModal from "@/components/modal/changePasswordModal/changePasswordModal";
 import { setModalActive } from "@/store/modules/auth/auth.actions";
 import profile from "./profile.module.scss";
 import { RootState } from "@/main";
-import InfoAboutUser from "@/components/modules/profile/infoAboutUser";
 import profileImage from "../../assets/images/noPictureLeft.png";
 import { StoreState } from "@/store/types";
+import Preloader from "@/components/UI/preloader/preloader";
+
+const InfoAboutUser=React.lazy(()=>import("@/components/modules/profile/infoAboutUser"));
+
 const RegistrationModal: React.FunctionComponent = function () {
   const [activeChangePasswordModal, setActiveChanePassword] = useState(false);
   const dispatch = useDispatch();
@@ -24,7 +27,9 @@ const RegistrationModal: React.FunctionComponent = function () {
           <button>Change profile image</button>
         </div>
         <div className={profile.column}>
-          <InfoAboutUser />
+          <Suspense fallback={<Preloader />}>
+            <InfoAboutUser />
+          </Suspense>
         </div>
         <div className={profile.column}>
           <button onClick={showChangePasswordModal}>Change password</button>

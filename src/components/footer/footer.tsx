@@ -1,8 +1,7 @@
 import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Link } from "react-router-dom";
 import footer from "./footer.module.scss";
-import { links } from "../../constants/constants";
+import { links } from "../../constants/routeMenuConstant";
 
 const Footer: React.FunctionComponent = function () {
   const arrayLinks: Array<string> = [
@@ -16,9 +15,10 @@ const Footer: React.FunctionComponent = function () {
       <Link to={links.home}>Game Store</Link>
       <ul className={footer.iconBlock}>
         {arrayLinks.map((elem, i) => (
-          // eslint-disable-next-line react/no-array-index-key
           <li key={i}>
-            <img src={elem} alt={`Picture ${i}`} />
+            <Link to={elem}>
+              <img src={elem} alt={`Picture ${i}`} />
+            </Link>
           </li>
         ))}
       </ul>

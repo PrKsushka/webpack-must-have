@@ -1,6 +1,6 @@
 import { Rating } from "@/types/productsCommon.types";
 
-interface ProductReducer {
+export interface ProductReducer {
   id: number;
   title: string;
   price: number;
@@ -32,7 +32,7 @@ export interface AuthStateTypes {
 }
 export interface ProductStateTypes {
   allProducts: Array<ProductReducer>;
-  sortByCategory: Array<object>;
+  newProducts: Array<object>;
   errorMessage: string;
   successMessage: string;
   cart: Array<ProductReducer>;

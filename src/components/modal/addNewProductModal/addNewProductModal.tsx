@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { editAddNewProductModal } from "@/components/UI/input/schemas";
 import { dataForm } from "@/types/productsCommon.types";
-import signin from "@/components/UI/input/input.module.scss";
+import signin from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
@@ -15,6 +15,9 @@ import styles from "../editModal/editModal.module.scss";
 import { addNewPositionAction } from "../../../store/modules/products/products.actions";
 import { StoreState } from "@/store/types";
 import { RootState } from "@/main";
+import toggleBodyOverflow from "@/utils/overflow";
+import { ages, categories } from "@/constants/adminPageConstants";
+
 
 
 const AddNewProductModal: React.FunctionComponent = function () {
@@ -25,19 +28,16 @@ const AddNewProductModal: React.FunctionComponent = function () {
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(editAddNewProductModal) });
   const dispatch = useDispatch();
-  const { body } = document;
+
   const onSubmit = (data: dataForm) => {
-    console.log(data);
     if (data) {
       dispatch(addNewPositionAction(data));
-      body.style.overflow = "auto";
+      toggleBodyOverflow();
     }
     dispatch(setModalInActive());
     reset();
   };
   const isActiveAddNewProductModal = useSelector<RootState, boolean>((state: StoreState) => state.auth.addNewProductModal);
-  const ages = ["3+", "6+", "12+", "18+"];
-  const categories = ["pc", "xbox", "playstation"];
   return (
     <Modal isActive={isActiveAddNewProductModal}>
       <form className={signin.formData} onSubmit={handleSubmit(onSubmit)}>
@@ -73,7 +73,7 @@ const AddNewProductModal: React.FunctionComponent = function () {
         <br />
         <Input
           name="image"
-          text="Image"
+          text="Image (url)"
           registerOptions={{
             required: true,
           }}

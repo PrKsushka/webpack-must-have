@@ -10,7 +10,7 @@ const StarRating: React.FunctionComponent<StarRating> = function ({
   const inactiveColor = "#ddd";
   const size = 24;
   const activeColor = "#fff204";
-  const stars = Array.from({ length: count }, () => "🟊");
+  const stars = Array.from({ length: count }, () =>'\u2605');
   return (
     <div className={s.star}>
       {stars.map((el, index) => {

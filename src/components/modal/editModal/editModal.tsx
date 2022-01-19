@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { editAddNewProductModal } from "@/components/UI/input/schemas";
 import { dataForm, TopProduct } from "@/types/productsCommon.types";
-import signin from "@/components/UI/input/input.module.scss";
+import signin from "../modal.module.scss";
 import Input from "@/components/UI/input/input";
 import ErrorMessage from "@/components/errorMessage/errorMessage";
 import Modal from "@/components/modal/modal";
@@ -16,6 +16,9 @@ import styles from "./editModal.module.scss";
 import { RootState } from "@/main";
 import { StoreState } from "@/store/types";
 import { Dispatcher } from "@/types/types";
+import toggleBodyOverflow from "@/utils/overflow";
+import { ages, categories } from "@/constants/adminPageConstants";
+
 
 interface EditModalTypes {
   openModal: Dispatcher<boolean>;
@@ -29,22 +32,22 @@ const EditModal: React.FunctionComponent<EditModalTypes> = function ({ obj, open
     formState: { errors },
   } = useForm({ mode: "onChange", resolver: yupResolver(editAddNewProductModal) });
   const dispatch = useDispatch();
-  const { body } = document;
+
   const onSubmit = (data: dataForm) => {
-    console.log(data);
     if (data) {
       dispatch(updateProduct(data, obj.id));
-      body.style.overflow = "auto";
+      toggleBodyOverflow();
     }
     dispatch(setModalInActive());
     reset();
   };
   const deleteProduct = () => {
     const answer = window.confirm(`Are you sure? You want to delete ${obj.title}`);
-    answer && obj.id !== undefined ? dispatch(removeFromListOfProducts(obj.id)) : null;
+    if(answer && obj.id !== undefined){
+      dispatch(removeFromListOfProducts(obj.id))
+    }
   };
-  const ages = ["3+", "6+", "12+", "18+"];
-  const categories = ["pc", "xbox", "playstation"];
+
   const isActiveEditModal = useSelector<RootState, boolean>((state: StoreState) => state.auth.editModal);
   return (
     <Modal isActive={isActiveEditModal} el={openModal}>
@@ -84,7 +87,7 @@ const EditModal: React.FunctionComponent<EditModalTypes> = function ({ obj, open
         <br />
         <Input
           name="image"
-          text="Image"
+          text="Image (url)"
           value={obj.image}
           registerOptions={{
             required: true,

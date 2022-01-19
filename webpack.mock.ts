@@ -55,7 +55,8 @@ export default webpackMockServer.add((app, helper) => {
     });
   });
   app.get("/api/products", (_req, res) => {
-    data.sort((a, b) => a.id - b.id);
+    data.sort((a: TopProduct, b: TopProduct) => Date.parse(<string>b.date) - Date.parse(<string>a.date));
+
     if (_req.query.sortPrice === "asc") {
       data.sort((a: TopProduct, b: TopProduct) => {
         const c = <number>a.price;
@@ -91,6 +92,9 @@ export default webpackMockServer.add((app, helper) => {
       if (_req.query.genre !== "all") {
         res.json(newSortArr);
       }
+      if (_req.query.genre === "all") {
+        res.json(data);
+      }
       return;
     }
     if (_req.query.userAge) {
@@ -99,6 +103,9 @@ export default webpackMockServer.add((app, helper) => {
       );
       if (_req.query.userAge !== "all") {
         res.json(newSortArr);
+      }
+      if (_req.query.userAge === "all") {
+        res.json(data);
       }
       return;
     }

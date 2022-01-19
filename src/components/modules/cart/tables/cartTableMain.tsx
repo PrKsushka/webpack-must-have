@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TopProduct } from "@/types/productsCommon.types";
-import styles from "@/pages/cart/cart.module.scss";
+import styles from "./cartProductsListTable/cartProductListTable.module.scss";
 import { RootState } from "@/main";
 import changeDate from "@/utils/date";
 import {
@@ -10,29 +10,21 @@ import {
   removeFromCartAction,
 } from "@/store/modules/products/products.actions";
 import { StoreState } from "@/store/types";
-type DeleteProductFunc = {
-  id?: number;
-  e: React.ChangeEvent<HTMLInputElement>;
-};
+
 const CartTableMain: React.FunctionComponent = function () {
   const cart = useSelector<RootState, Array<object>>((state: StoreState) => state.products.cart);
-  const [checkedForDelete, setCheckedForDelete] = useState(true);
 
   const orderDate = changeDate();
   const dispatch = useDispatch();
 
   const increaseCount = (id?: number) => {
-    (id !== undefined) ? dispatch(increaseCountAction(id)) : null;
+    if(id !== undefined) { dispatch(increaseCountAction(id)) }
   };
   const decreaseCount = (id?: number) => {
-    (id !== undefined) ? dispatch(decreaseCountAction(id)) : null;
+    if(id !== undefined) { dispatch(decreaseCountAction(id)) }
   };
-  const deleteProductFromCart = ({ id, e }: DeleteProductFunc) => {
-    const { checked } = e.target;
-    setCheckedForDelete(checked);
-    if (checkedForDelete) {
-      dispatch(removeFromCartAction(id));
-    }
+  const deleteProductFromCart = (id?: number) => {
+    if(id!==undefined) { dispatch(removeFromCartAction(id)) }
   };
   return (
     <tbody>
@@ -62,7 +54,9 @@ const CartTableMain: React.FunctionComponent = function () {
           </td>
           <td>{el.price}</td>
           <td>
-            <input type="checkbox" onChange={(e) => deleteProductFromCart({ id: el.id, e })} />
+            <button type="button" onClick={() => deleteProductFromCart(el.id)} className={styles.delete} >
+              Delete
+            </button>
           </td>
           <td>
             {Number(el.count) < 0 ? "Sorry, we don't have enough games for you" : ""}
