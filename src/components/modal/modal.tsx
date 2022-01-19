@@ -18,7 +18,7 @@ const Modal: React.FunctionComponent<Modal> = function ({ isActive, el, children
   const closeModal = () => {
     dispatch(setModalInActive());
     toggleBodyOverflow();
-    if(el) {el(false)}
+    if (el) el(false);
   };
   useEffect(() => {
     if(isActive){

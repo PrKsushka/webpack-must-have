@@ -46,7 +46,7 @@ const CardItem: React.FunctionComponent<CardProps> = function ({ item }) {
           <button className={card.addToCart} onClick={addToCart}>
             Add to cart
           </button>
-          {userName.toLowerCase() === "admin" ? (
+          {userName && userName.toLowerCase() === "admin" ? (
             <button className={card.addToCart} onClick={edit}>
               Edit
             </button>

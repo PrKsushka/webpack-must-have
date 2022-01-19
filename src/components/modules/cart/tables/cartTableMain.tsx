@@ -18,13 +18,13 @@ const CartTableMain: React.FunctionComponent = function () {
   const dispatch = useDispatch();
 
   const increaseCount = (id?: number) => {
-    if(id !== undefined) { dispatch(increaseCountAction(id)) }
+    if (id !== undefined) dispatch(increaseCountAction(id));
   };
   const decreaseCount = (id?: number) => {
-    if(id !== undefined) { dispatch(decreaseCountAction(id)) }
+    if (id !== undefined) dispatch(decreaseCountAction(id));
   };
   const deleteProductFromCart = (id?: number) => {
-    if(id!==undefined) { dispatch(removeFromCartAction(id)) }
+    if (id !== undefined) dispatch(removeFromCartAction(id));
   };
   return (
     <tbody>
@@ -54,7 +54,7 @@ const CartTableMain: React.FunctionComponent = function () {
           </td>
           <td>{el.price}</td>
           <td>
-            <button type="button" onClick={() => deleteProductFromCart(el.id)} className={styles.delete} >
+            <button type="button" onClick={() => deleteProductFromCart(el.id)} className={styles.delete}>
               Delete
             </button>
           </td>
